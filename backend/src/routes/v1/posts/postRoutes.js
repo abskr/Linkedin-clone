@@ -11,12 +11,11 @@ const router = express.Router();
 // @access Public
 router.get(
   "/",
-  authGuard,
   asyncHandler(async (req, res, next) => {
-    const post = await PostModel.find().populate('user', ['name', 'avatar']);
-    if (!post) return next(new NotFoundError("No post yet!"));
+    const posts = await PostModel.find().populate('user', ['username', 'avatar']);
+    if (!posts) return next(new NotFoundError("No post yet!"));
     console.log(PostModel)
-    res.status(200).send(post);
+    res.status(200).send(posts);
   })
 );
 
@@ -61,6 +60,9 @@ router.put(
   })
 );
 
+// @route  DELETE v1/posts/:id
+// @desc   Test route
+// @access Private
 router.delete(
   "/:id",
   authGuard,
@@ -79,6 +81,24 @@ router.delete(
   })
 );
 
+// @route  GET v1/posts/:id
+// @desc   Test route
+// @access Public
+router.get(
+  "/:id",
+  authGuard,
+  asyncHandler(async (req, res, next) => {
+    const post = await PostModel.findById(req.params.id)
+
+    if (!post) {
+      if (post.user !== id) {
+        return next(new ForbiddenError("Ya ain't allowed to do that!"))
+      }
+      return next(new NotFoundError('Post not found!'))
+    }
+    res.status(200).send(post);
+  })
+);
 
 
 
