@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+<div align="center" justify="center" style="text-align:center; -webkit-animation: rotate-90-cw 3s linear infinite both; animation: rotate-90-cw 3s linear infinite both">
+  <pre> <img width="310" alt="Strive Logo" src="https://bookface-images.s3.amazonaws.com/logos/8e7133f016718ede36663987992de88d15606d02.png?1593602849">  <img width="155" alt="Strive Logo" src="https://1000logos.net/wp-content/uploads/2017/03/LinkedIn-Logo-2011.jpg"> </pre>
+</div>
+<br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### LINKEDIN BUILD WEEK 2 REACT TEAM PROJECT - [Live demo](https://spotify-v2.netlify.app/)
 
-## Available Scripts
+> Team frontend project built using Reactjs
+<br>
 
-In the project directory, you can run:
+![image](https://user-images.githubusercontent.com/65465380/113683400-0eb9ae80-96bc-11eb-9a10-6f1b10c95a22.png)
 
-### `npm start`
+> All contributors have taken ownership of multiple critical issues and feature enhancements listed on the project boards submitting commits of at the highest standard possible.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> Tools, libraries and awesome tech sanctioned for this project
 
-### `npm test`
+- Major languages - HTML, SCSS, Javascript(ES6)
+- Frameworks - Reactjs 17.02 React Bootstrap
+- Packages - Axios, Framer Motion & CSS in JS
+- Technologies - Netlify Hosting & CDN
+- Infrastructure - Github CICD pipeline
+- Project Management - Github project kanban boards
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Wakatime stats
+<img width="800" src="https://github.com/skopsap/spotifyv2/blob/develop/images/stat.svg" alt="Waka stats for develop branch"/>
 
-### `npm run build`
+#### Devops
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> Our git development workflow as follows: 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Main branch for live production/deployment with Netlify.
+- Development branch for feature integration and application testing.
+- Local development branches for ongoing feature development.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```            
+                             _______       _____                        
+                             ___    |      __  /___________ _______ ___ 
+                             __  /| |      _  __/  _ \  __ `/_  __ `__ \
+               Development   _  ___ |      / /_ /  __/ /_/ /_  / / / / /
+               Staging       /_/  |_|      \__/ \___/\__,_/ /_/ /_/ /_/ 
+                   ^
+Production         |                        
+Main branch        |       
+^  <-------------- |
+|                  |\
+|                  | \
+|                  |  \  local feature branches merged into dev/staging for  
+|                  |  /  testing before being merged to main/production   
+|                  | /   ex. branch: toni/header-img-fix  
+|                  |/ 
+|                  |
+main ------------ dev <------> freature/branches (Flynn & Sean)
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Git clone the repository to your local computer, use LiveServer to view in development.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Prerequisites
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Visual Studio Code (recommended)
+- SASS live compiler plugin for vs code to compile scss files.
+- LiveServer plugin for serving the index.html file in your local browser.
 
-## Learn More
+#### Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Our 'main' deployment branch is CI into Netlify so any pushes to the main branch will auto publish to Netlify hosting and thier edge CDN.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Team
 
-### Code Splitting
+<div float="left">
+  <div>
+    👤 Flynn Stacey
+  </dv>
+  <div>
+    👤 Aymane abssi
+  </dv>
+  <div>
+    👤 Sean Knowles
+    <a href="https://github.com/SKopsap">Github</a> |
+    <a href="https://linkedin.com/seanknowlesmd">LinkedIn</a>
+  </dv>
+</div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### 🤝 Contributing
 
-### Analyzing the Bundle Size
+Contributions, issues, and feature requests are welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Feel free to check the [issues page](https://github.com/SKopsap/SpotifyV2/issues).
 
-### Making a Progressive Web App
+#### Show your support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Give a ⭐️ if you like this project, every star means something, show us some love :)!
 
-### Advanced Configuration
+#### Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To our Strive mentors:
 
-### Deployment
+- Luis
+- Stefano
+- Tatiana
+- Ubeyt
+- Riccardo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### 📝 License
 
-### `npm run build` fails to minify
+No need, this is freely available.
+Copied
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
