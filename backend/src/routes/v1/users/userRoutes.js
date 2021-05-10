@@ -34,7 +34,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     validationHandler(req)
 
-    const { name, lastname, email, password } = req.body
+    const { name, lastname, email, password, username } = req.body
 
     let user = await UserModel.findOne({ email })
     if (user) return next(new BadRequestError('User already exists'))
@@ -50,6 +50,7 @@ router.post(
       lastname,
       email,
       avatar,
+      username,
       password,
     })
 

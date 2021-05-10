@@ -13,6 +13,13 @@ export const usersPostValidator = {
       trim: true,
     },
   },
+  username: {
+    isLength: {
+      errorMessage: "Name should be at least 3 chars long",
+      options: { min: 3, max: 50 },
+      trim: true,
+    },
+  },
   email: {
     errorMessage: "Email should be a valid email address",
     isEmail: true,
