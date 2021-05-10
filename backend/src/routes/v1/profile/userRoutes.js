@@ -9,7 +9,7 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
   const users = {}
 
-  if (!users) next(new NotFoundError("Users not found"))
+  if (!users) return next(new NotFoundError("Users not found"))
 
   res.status(200).send(users)
 }))

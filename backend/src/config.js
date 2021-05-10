@@ -34,6 +34,8 @@ export const corsUrlProduction = process.env.CORS_URL_PROD || "";
 export const corsUrlDevelopment = process.env.CORS_URL_DEV || "";
 
 // AUTH
+export const jwtSecret = process.env.JWTSECRET
+
 // export const tokenInfo = {
 //   accessTokenValidityDays: parseInt(process.env.ACCESS_TOKEN_VALIDITY_SEC || '0'),
 //   refreshTokenValidityDays: parseInt(process.env.REFRESH_TOKEN_VALIDITY_SEC || '0'),
