@@ -13,7 +13,7 @@ router.get(
   "/",
   authGuard,
   asyncHandler(async (req, res, next) => {
-    const post = await PostModel.find();
+    const post = await PostModel.find().populate('user', ['name', 'avatar']);
     if (!post) return next(new NotFoundError("No post yet!"));
     console.log(PostModel)
     res.status(200).send(post);
