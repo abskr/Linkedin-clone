@@ -22,7 +22,7 @@ const mongoURL = `mongodb+srv://${mongoDB.mdbUser}:${mongoDB.mdbPassword}@${mong
 export const connectToMongoDB = async () => {
   try {
     await mongoose.connect(mongoURI, options)
-    Logger.info(`Mongo ☁ Cloud Atlas | ${mongoDB.mdbHost} | User: ${mongoDB.mdbUser} | Connection Established ✅`)
+    Logger.info(`Mongo ☁ Cloud Atlas | ${mongoDB.mdbHost} | User: ${mongoDB.mdbUser} | Env: ${mongoDB.mdbDatabase} | Connected ✅`)
 
     // When successfully connected
     mongoose.connection.on('connected', () => {
