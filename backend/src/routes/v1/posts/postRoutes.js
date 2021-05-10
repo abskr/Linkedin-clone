@@ -41,15 +41,22 @@ router.put(
   "/:id",
   authGuard,
   asyncHandler(async (req, res, next) => {
-    const post = await PostModel.findById(req.params.id)
     
-    if (!post) return next(new NotFoundError('Post not found!'))
-    if (post.user !== req.user.id) return next(new ForbiddenError("Ya ain't allowed to do dat!"))
+    const {id} = req.user
+    
+    const post = await PostModel.findById(req.params.id)
+
+    if (!post) {
+      if (post.user !== id) {
+        return next(new ForbiddenError("Ya ain't allowed to do that!"))
+      }
+      return next(new NotFoundError('Post not found!'))
+    }
     
     const updatedPost = await PostModel.findByIdAndUpdate(req.params.id, req.body, {
       runValidators: true,
       new: true
-    })
+      })
     res.status(200).send(updatedPost)
   })
 );
@@ -60,11 +67,15 @@ router.delete(
   asyncHandler(async (req, res, next) => {
     const post = await PostModel.findById(req.params.id)
 
-    if (!post) return next(new NotFoundError('Post not found!'))
-    if (post.user !== req.user.id) return next(new ForbiddenError("Ya ain't allowed to do dat!"))
+    if (!post) {
+      if (post.user !== id) {
+        return next(new ForbiddenError("Ya ain't allowed to do that!"))
+      }
+      return next(new NotFoundError('Post not found!'))
+    }
 
-    const removedPost = await PostModel.findByIdAndDelete(req.param.id)
-    res.status(200).send(req.params.id, " is deleted!");
+    const removedPost = await PostModel.findByIdAndDelete(req.params.id)
+    res.status(200).send('deleted!');
   })
 );
 
