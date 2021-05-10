@@ -24,4 +24,23 @@ router.get(
   })
 )
 
+router.get(
+  '/profile',
+  asyncHandler(async (req, res, next) => {
+    const profiles = await ProfileModel.find()
+    if (!profiles) return next(new NotFoundError('No profiles found!'))
+
+    res.status(200).send(profiles)
+  })
+)
+
+router.get(
+  '/:id',
+  asyncHandler(async (req, res, next) => {
+    const id = req.params.id
+    const profile = await ProfileModel.findById(id)
+    if (!profile) return next(new NotFoundError('No profile found for this ID!'))
+    res.status(200).send(profile)
+  })
+)
 export default router
