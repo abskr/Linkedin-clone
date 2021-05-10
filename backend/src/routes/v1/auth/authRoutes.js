@@ -14,7 +14,7 @@ const router = express.Router()
 
 // @route  GET v1/auth
 // @desc   return a user by id if authenticated
-// @access Public
+// @access Private
 router.get(
   '/',
   authGuard,

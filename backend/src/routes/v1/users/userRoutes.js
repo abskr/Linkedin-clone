@@ -13,7 +13,7 @@ import UserModel from '../../../database/mongoDB/models/UserModel.js'
 const router = express.Router()
 
 // @route  GET v1/users
-// @desc   Test route
+// @desc   Returns all users
 // @access Public
 router.get(
   '/',
@@ -26,7 +26,7 @@ router.get(
 )
 
 // @route  POST v1/users
-// @desc   Register user
+// @desc   Register new user
 // @access Public
 router.post(
   '/',
@@ -34,7 +34,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     validationHandler(req)
 
-    const { name, email, password } = req.body
+    const { name, lastname, email, password } = req.body
 
     let user = await UserModel.findOne({ email })
     if (user) return next(new BadRequestError('User already exists'))
@@ -47,6 +47,7 @@ router.post(
 
     user = new UserModel({
       name,
+      lastname,
       email,
       avatar,
       password,
