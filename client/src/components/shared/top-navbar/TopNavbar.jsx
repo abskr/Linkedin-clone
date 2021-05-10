@@ -1,37 +1,45 @@
-import React from "react";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
-import { Container } from "react-bootstrap";
-import "./style.css";
-import { Link } from "react-router-dom";
-import linkedInSmLogo from "../../../assets/LinkedinSVG's/svgexport-11.svg";
-import { BiSearchAlt2 } from "react-icons/bi";
-import { HiHome } from "react-icons/hi";
-import { BsPeopleFill } from "react-icons/bs";
-import { BsBriefcaseFill } from "react-icons/bs";
-import { RiMessage2Fill } from "react-icons/ri";
-import { GoBell } from "react-icons/go";
-import { CgMenuGridO } from "react-icons/cg";
-import { RiSlideshow3Fill } from "react-icons/ri";
+import React from 'react'
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
+import './style.css'
+import { Link } from 'react-router-dom'
+import linkedInSmLogo from "../../../assets/LinkedinSVG's/svgexport-11.svg"
+import { BiSearchAlt2 } from 'react-icons/bi'
+import { HiHome } from 'react-icons/hi'
+import { BsPeopleFill } from 'react-icons/bs'
+import { BsBriefcaseFill } from 'react-icons/bs'
+import { RiMessage2Fill } from 'react-icons/ri'
+import { GoBell } from 'react-icons/go'
+import { CgMenuGridO } from 'react-icons/cg'
+import { RiSlideshow3Fill } from 'react-icons/ri'
+import { useHistory } from 'react-router-dom'
+import useToken from '../../../hooks/useToken.js'
 
 const navbarStyle = {
-  backgroundColor: "white",
-  borderBottom: "1px solid #e8e8e8",
-};
+  backgroundColor: 'white',
+  borderBottom: '1px solid #e8e8e8',
+}
 const searchInput = {
-  padding: "17px",
-  paddingLeft: "55px",
-  width: "280px",
-  border: "1px solid #f5f5f5",
-  fontSize: "1rem",
-  lineHeight: "1.5",
-  backgroundColor: "#f2f5fa",
-  outline: "0",
-};
+  padding: '17px',
+  paddingLeft: '55px',
+  width: '280px',
+  border: '1px solid #f5f5f5',
+  fontSize: '1rem',
+  lineHeight: '1.5',
+  backgroundColor: '#f2f5fa',
+  outline: '0',
+}
 
 const rightNav = {
-  borderLeft: "1px solid #e8e8e8",
-};
-export default function TopNavbar({ links, title, image }) {
+  borderLeft: '1px solid #e8e8e8',
+}
+export default function TopNavbar({ links, title, image, ...props }) {
+  const { removeToken } = useToken()
+  const history = useHistory()
+  const logout = () => {
+    removeToken()
+    history.push('/login')
+  }
   return (
     <div>
       <Navbar style={navbarStyle}>
@@ -42,7 +50,7 @@ export default function TopNavbar({ links, title, image }) {
             </Link>
           </Navbar.Brand>
           <Form inline>
-            <div style={{ position: "relative" }}>
+            <div style={{ position: 'relative' }}>
               <FormControl
                 style={searchInput}
                 type="text"
@@ -51,10 +59,10 @@ export default function TopNavbar({ links, title, image }) {
               />
               <BiSearchAlt2
                 style={{
-                  position: "absolute",
-                  left: "25",
-                  top: "10",
-                  fontSize: "1.2rem",
+                  position: 'absolute',
+                  left: '25',
+                  top: '10',
+                  fontSize: '1.2rem',
                 }}
               />
             </div>
@@ -67,47 +75,47 @@ export default function TopNavbar({ links, title, image }) {
                   to="/"
                   className="text-dark d-flex flex-column justify-content-center align-items-center navLink"
                   style={{
-                    textDecoration: "none",
-                    fontSize: "12px",
+                    textDecoration: 'none',
+                    fontSize: '12px',
                   }}
                 >
-                  <HiHome style={{ fontSize: "24px" }} />
+                  <HiHome style={{ fontSize: '24px' }} />
                   Home
                 </Link>
               </Nav.Item>
               <Nav.Item className="mx-2">
                 <Link
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <BsPeopleFill style={{ fontSize: "24px" }} />
+                  <BsPeopleFill style={{ fontSize: '24px' }} />
                   My Network
                 </Link>
               </Nav.Item>
               <Nav.Item className="mx-2">
                 <Link
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <BsBriefcaseFill style={{ fontSize: "24px" }} />
+                  <BsBriefcaseFill style={{ fontSize: '24px' }} />
                   Jobs
                 </Link>
               </Nav.Item>
               <Nav.Item className="mx-2">
                 <Link
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <RiMessage2Fill style={{ fontSize: "24px" }} />
+                  <RiMessage2Fill style={{ fontSize: '24px' }} />
                   Messaging
                 </Link>
               </Nav.Item>
               <Nav.Item className="mx-2">
                 <Link
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <GoBell style={{ fontSize: "24px" }} />
+                  <GoBell style={{ fontSize: '24px' }} />
                   Notifications
                 </Link>
               </Nav.Item>
@@ -115,9 +123,9 @@ export default function TopNavbar({ links, title, image }) {
                 <Link
                   to="/profile"
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <img src={image} style={{ height: "24px" }} />
+                  <img src={image} style={{ height: '24px' }} />
                   Profile
                 </Link>
               </Nav.Item>
@@ -127,18 +135,20 @@ export default function TopNavbar({ links, title, image }) {
               <Nav.Item className="ml-4 mr-2">
                 <Link
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <CgMenuGridO style={{ fontSize: "24px" }} />
+                  <CgMenuGridO style={{ fontSize: '24px' }} />
                   Work
                 </Link>
               </Nav.Item>
               <Nav.Item className="ml-4 mr-2">
                 <Link
+                  onClick={logout}
+                  refresh="true"
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
-                  style={{ textDecoration: "none", fontSize: "12px" }}
+                  style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <RiSlideshow3Fill style={{ fontSize: "24px" }} />
+                  <RiSlideshow3Fill style={{ fontSize: '24px' }} />
                   Learning
                 </Link>
               </Nav.Item>
@@ -160,5 +170,5 @@ export default function TopNavbar({ links, title, image }) {
         </Container>
       </Navbar>
     </div>
-  );
+  )
 }

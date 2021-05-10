@@ -1,11 +1,10 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
+import RollerSpinner from 'components/shared/spinners/RollerSpinner'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import RollerSpinner from 'components/shared/spinners/RollerSpinner'
-import Modal from 'components/shared/modal/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
 
+const LoginPage = React.lazy(() => import('./pages/LoginPage.jsx'))
 const Topnav = React.lazy(() =>
   import('./components/shared/top-navbar/TopNavbar')
 )
@@ -14,8 +13,16 @@ const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
 const AdminPage = React.lazy(() => import('./pages/AdminPage'))
 
 function App() {
+  const [user, setUser] = useState({})
   const location = useLocation()
-  const [showModal, setShowModal] = useState(false)
+
+  if (!localStorage.getItem('token'))
+    return (
+      <Suspense fallback={<RollerSpinner />}>
+        <LoginPage setUser={setUser} />
+      </Suspense>
+    )
+
   return (
     <Suspense fallback={<RollerSpinner />}>
       <div className="App">
@@ -29,36 +36,34 @@ function App() {
               'Messaging',
               'Notifications',
               'Profile',
-              'Admin'
+              'Admin',
             ]}
           />
         </header>
-        <Modal
-          title="Edit about"
-          showModal={showModal}
-          setShowModal={setShowModal}
-        >
-          Testing modal content
-        </Modal>
       </div>
       <AnimatePresence exitBeforeEnter initial={false}>
         <Switch location={location} key={location.pathname}>
           <Route
             exact
             path="/"
-            render={(routerProps) => <HomePage {...routerProps} />}
+            render={(routerProps) => <HomePage {...routerProps} user={user} />}
           />
           <Route
             exact
             path="/profile"
             render={(routerProps) => (
-              <ProfilePage setShowModal={setShowModal} {...routerProps} />
+              <ProfilePage {...routerProps} user={user} />
             )}
           />
           <Route
             exact
             path="/admin"
-            render={(routerProps) => <AdminPage {...routerProps} />}
+            render={(routerProps) => <AdminPage {...routerProps} user={user} />}
+          />
+          <Route
+            exact
+            path="/login"
+            render={(routerProps) => <LoginPage {...routerProps} />}
           />
         </Switch>
       </AnimatePresence>

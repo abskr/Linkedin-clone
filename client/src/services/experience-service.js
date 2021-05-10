@@ -1,4 +1,4 @@
-import { headers } from './APIShared'
+import { headers } from './index.js'
 const _BASE_URL = 'https://striveschool-api.herokuapp.com/api/profile/'
 
 /**
@@ -23,7 +23,7 @@ export async function getAllExperienceByUserId(userId) {
   try {
     const resp = await fetch(`${_BASE_URL}/${userId}/experiences`, {
       method: 'GET',
-      headers
+      headers,
     })
     if (resp.ok) {
       const data = await resp.json()
@@ -42,7 +42,7 @@ export async function getExperience(userId, experienceId) {
       `${_BASE_URL}/${userId}/experiences/${experienceId}`,
       {
         method: 'GET',
-        headers
+        headers,
       }
     )
     if (resp.ok) {
@@ -79,7 +79,7 @@ export async function addExperience(experienceObj, userId) {
     const resp = await fetch(`${_BASE_URL}/${userId}/experiences`, {
       method: 'POST',
       headers,
-      body: JSON.stringify(experienceObj)
+      body: JSON.stringify(experienceObj),
     })
     if (resp.ok) {
       const data = await resp.json()
@@ -98,7 +98,7 @@ export async function deleteExperienceById(userId, experienceId) {
       `${_BASE_URL}/${userId}/experiences/${experienceId}`,
       {
         method: 'DELETE',
-        headers
+        headers,
       }
     )
     if (resp.ok) {
