@@ -23,7 +23,19 @@ router.get(
     res.status(200).send(profile)
   })
 )
+router.get(
+  '/:username',
+  authGuard,
+  asyncHandler(async (req, res, next) => {
+    const profile = await ProfileModel.findOne({
+      user: req.profile.username,
+    }).populate('user', ['name', 'avatar'])
 
+    if (!profile) return next(new NotFoundError('No profile found for user'))
+
+    res.status(200).send(profile)
+  })
+)
 router.get(
   '/profile',
   asyncHandler(async (req, res, next) => {
@@ -39,8 +51,19 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const id = req.params.id
     const profile = await ProfileModel.findById(id)
-    if (!profile) return next(new NotFoundError('No profile found for this ID!'))
+    if (!profile)
+      return next(new NotFoundError('No profile found for this ID!'))
     res.status(200).send(profile)
+  })
+)
+
+router.post(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    const newProfile = new ProfileModel(req.body)
+    const { _id } = await newProfile.save()
+
+    res.status(201).send(_id)
   })
 )
 export default router
