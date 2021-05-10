@@ -27,7 +27,7 @@ router.get(
 )
 
 // @route  POST v1/auth
-// @desc   Authenticate user
+// @desc   Authenticate user (login)
 // @access Public
 router.post(
   '/',
@@ -51,7 +51,7 @@ router.post(
     // jwt sign and return token & user object in response to client
     jwt.sign(payload, jwtSecret, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err
-      res.status(201).send({ token, user })
+      res.status(201).send({ user, token })
     })
   })
 )
