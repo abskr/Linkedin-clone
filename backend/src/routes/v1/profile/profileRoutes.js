@@ -31,7 +31,8 @@ router.get(
       user: req.profile.username,
     }).populate('user', ['name', 'avatar', 'username'])
 
-    if (!profile) return next(new NotFoundError('No profile found for this user'))
+    if (!profile)
+      return next(new NotFoundError('No profile found for this user'))
 
     res.status(200).send(profile)
   })
@@ -67,20 +68,32 @@ router.post(
   })
 )
 
-router.put("/:id",  authGuard, asyncHandler(async(req, res, next) => {
-    const profile = await ProfileModel.findByIdAndUpdate(req.params.id, req.body, {
-      runValidators: true,
-      new: true,
-    })
-    if (!profile) return next(new NotFoundError('No profile found for this ID!'))
+router.put(
+  '/:id',
+  authGuard,
+  asyncHandler(async (req, res, next) => {
+    const profile = await ProfileModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        runValidators: true,
+        new: true,
+      }
+    )
+    if (!profile)
+      return next(new NotFoundError('No profile found for this ID!'))
     res.status(200).send(profile)
-    
-})
+  })
 )
-usersRouter.delete("/:id", asyncHandler(async (req, res, next) => {
+
+router.delete(
+  '/:id',
+  asyncHandler(async (req, res, next) => {
     const profile = await ProfileModel.findByIdAndDelete(req.params.id)
-    if (!profile) return next(new NotFoundError('No profile found for this ID!'))
+    if (!profile)
+      return next(new NotFoundError('No profile found for this ID!'))
     res.status(200).send('deleted')
-})
+  })
 )
+
 export default router
