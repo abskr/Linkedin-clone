@@ -5,19 +5,20 @@ import { NotFoundError, ForbiddenError } from "../../../core/apiErrors.js";
 import { authGuard } from "../../../guard/authGuard.js";
 import cloudinary from "../../../services/image/cloudinaryUpload.js"
 import CloudinaryStorage from "multer-storage-cloudinary"
+import multer from "multer"
 
 const router = express.Router();
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "LinkedinPhotos",
-  },
-});
+// const storage = new CloudinaryStorage({
+//   cloudinary: cloudinary,
+//   params: {
+//     folder: "LinkedinPhotos",
+//   },
+// });
 
-const cloudinaryMulter = multer({
-  storage: storage
-});
+// const cloudinaryMulter = multer({
+//   storage: storage
+// });
 
 // @route  GET v1/posts
 // @desc   Test route
