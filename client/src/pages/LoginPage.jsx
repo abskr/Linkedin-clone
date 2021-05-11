@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import useToken from '../hooks/useToken.js'
 import {Button, Col, Container, Form, Row} from 'react-bootstrap'
 import linkedInLgLogo from "../assets/LinkedinSVG's/linkedInLargeLogo.svg"
@@ -37,11 +37,11 @@ export default function Login({ setUser, ...props }) {
 
   return (
     <Container
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex-row align-items-center justify-content-center"
       style={{ height: '100vh' }}
     >
       <Row className="border p-3" rounded md={{ span: 6, offset: 3 }}>
-      <img className="m-1" height={16} src={linkedInLgLogo} />
+        <img className="m-1" height={16} src={linkedInLgLogo} alt="logo" />
         <Col xs={12}>
           <div className="login-wrapper">
             <h1 className="mb-0">Log in</h1>
@@ -78,6 +78,13 @@ export default function Login({ setUser, ...props }) {
               </Col>
             </Row>
           </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} className="text-center">
+          <p>
+            New in LinkedIn? <b>Sign up here</b>
+          </p>
         </Col>
       </Row>
     </Container>
