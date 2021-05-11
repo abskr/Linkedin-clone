@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import useToken from '../hooks/useToken.js'
+import { baseURL } from '../config'
 
 export default function Login({ setUser, ...props }) {
   const { saveToken } = useToken()
@@ -10,7 +11,7 @@ export default function Login({ setUser, ...props }) {
   const [password, setPassword] = useState()
 
   const loginUser = async (credentials) => {
-    const resp = await fetch('http://localhost:5000/v1/auth', {
+    const resp = await fetch(`${baseURL}/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
