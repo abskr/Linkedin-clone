@@ -3,8 +3,21 @@ import PostModel from "../../../database/mongoDB/models/PostModel.js";
 import { asyncHandler } from "../../../core/asyncHandler.js";
 import { NotFoundError, ForbiddenError } from "../../../core/apiErrors.js";
 import { authGuard } from "../../../guard/authGuard.js";
+import cloudinary from "../../../services/image/cloudinaryUpload.js"
+import CloudinaryStorage from "multer-storage-cloudinary"
 
 const router = express.Router();
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "LinkedinPhotos",
+  },
+});
+
+const cloudinaryMulter = multer({
+  storage: storage
+});
 
 // @route  GET v1/posts
 // @desc   Test route
@@ -32,6 +45,34 @@ router.post(
     res.status(200).send(newPost);
   })
 );
+
+// router.post(
+//   "/:id",
+//   [authGuard, cloudinaryMulter.single("post")],
+//   asyncHandler(async (req, res, next) => {
+//     const post = await PostModel.findById(req.params.id)
+//     if (!post) {
+//       if (post.user !== req.user.id) {
+//         return next(new ForbiddenError("Ya ain't allowed to do that!"))
+//       }
+//       return next(new NotFoundError('Post not found!'))
+//     }
+//     const image = req.file && req.file.path;
+//     const updatePosts = await PostModel.findByIdAndUpdate(
+//       req.params.id, {
+//         $set: {
+//           image
+//         },
+//       }, {
+//         runValidators: true,
+//         new: true,
+//       }
+//     );
+//     res.status(201).json({
+//       data: `Photo added to Post with ID ${id}`
+//     })
+//   })
+// );
 
 // @route  PUT v1/posts/:id
 // @desc   Test route

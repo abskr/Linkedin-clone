@@ -45,3 +45,10 @@ export const jwtSecret = process.env.JWTSECRET
 
 // DIRECTORIES
 export const logDirectory = process.env.LOG_DIR;
+
+// CLOUDINARY
+export const cloudinaryConfig = {
+  cloudName: process.env.CLOUD_NAME,
+  apiKey: process.env.API_KEY,
+  apiSecret: process.env.API_SECRET,
+}
