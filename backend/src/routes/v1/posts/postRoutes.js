@@ -29,6 +29,8 @@ router.post(
   '/',
   authGuard,
   asyncHandler(async (req, res, next) => {
+    validationHandler(req)
+
     const newPost = new PostModel(req.body)
     newPost.user = req.user.id
     const { _id } = await newPost.save()
