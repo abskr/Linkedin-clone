@@ -3,24 +3,24 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 
 // containers
-import PVPymkContainer from 'containers/pv-pymk/PVPymkContainer'
-import PVTopCardContainer from 'containers/pv-top-card/PVTopCardContainer'
+import PeopleYouKnowContainer from 'components/profile/PeopleYouKnowContainer.jsx'
+import ProfileTopCardContainer from 'components/profile/ProfileTopCardContainer.jsx'
 
 // components
 import AdsBar from 'components/shared/adsbar/AdsBar'
-import PVProfileContent from 'components/pv-profile-content/PVProfileContent'
-import PVAdCard from 'components/pv-ad-card/PVAdCard'
-import PVAboutCard from 'components/pv-about-card/PVAboutCard'
-import PvDashboard from 'components/pv-dashboard/PvDashboard'
-import PVPalsoV from 'components/pv-pAlsoViewing/PVPalsoV'
-import Pvactivity from 'components/pv-activities/Pvactivity'
+import ProfileContent from 'components/profile/ProfileContent.jsx'
+import ProfileAdCard from 'components/profile/ProfileAdCard.jsx'
+import ProfileAboutCard from 'components/profile/ProfileAboutCard.jsx'
+import PvDashboard from 'components/profile/dashboard/PvDashboard'
+import ProfilePalsoV from 'components/profile/ProfilePalsoV.js'
+import ProfileActivity from 'components/profile/ProfileActivity.js'
 import Interests from 'components/interests/Interests'
-import Footer from 'components/footer/Footer'
-import Promoted from 'components/Pv-Promoted/Promoted'
-import Learning from 'components/Pv-Learning/Learning'
+import Footer from 'components/shared/Footer.js'
+import ProfilePromoted from 'components/profile/ProfilePromoted.js'
+import ProfileLearning from 'components/profile/ProfileLearning.js'
 
-import PVskillsCard from 'components/pv-skills&endourse/PVskillsCard'
-import PVExperienceListContainer from 'containers/pv-experience-card/PVExperienceListContainer'
+import ProfileSkillsCard from 'components/profile/ProfileSkillsCard.jsx'
+import ProfileExperienceContainer from 'components/profile/experience-card/ProfileExperienceContainer.jsx'
 
 export default class ProfilePage extends Component {
   render() {
@@ -39,23 +39,23 @@ export default class ProfilePage extends Component {
           </Row>
           <Row className="mt-4">
             <Col xs={12} sm={12} md={8}>
-              <PVTopCardContainer />
-              <PVAboutCard setShowModal={this.props.setShowModal} />
+              <ProfileTopCardContainer />
+              <ProfileAboutCard setShowModal={this.props.setShowModal} />
               <PvDashboard />
-              <Pvactivity />
-              <PVExperienceListContainer
+              <ProfileActivity />
+              <ProfileExperienceContainer
                 setShowModal={this.props.setShowModal}
               />
               <Interests />
-              <PVskillsCard />
+              <ProfileSkillsCard />
             </Col>
             <Col xs={12} md={4}>
-              <PVProfileContent />
-              <Promoted />
-              <PVAdCard />
-              <PVPymkContainer />
-              <PVPalsoV />
-              <Learning />
+              <ProfileContent />
+              <ProfilePromoted />
+              <ProfileAdCard />
+              <PeopleYouKnowContainer />
+              <ProfilePalsoV />
+              <ProfileLearning />
             </Col>
           </Row>
           <Row>
