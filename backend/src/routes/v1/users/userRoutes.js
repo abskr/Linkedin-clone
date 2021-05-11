@@ -8,7 +8,10 @@ import { asyncHandler } from '../../../core/asyncHandler.js'
 import { BadRequestError, NotFoundError } from '../../../core/apiErrors.js'
 import { validationHandler } from '../../../core/validationHandler.js'
 import { jwtSecret } from '../../../config.js'
+import { nanoid } from 'nanoid'
+
 import UserModel from '../../../database/mongoDB/models/UserModel.js'
+import ProfileModel from '../../../database/mongoDB/models/ProfileModel.js'
 
 const router = express.Router()
 
@@ -26,7 +29,7 @@ router.get(
 )
 
 // @route  POST v1/users
-// @desc   Register new user
+// @desc   Register/create new user
 // @access Public
 router.post(
   '/',
@@ -34,7 +37,7 @@ router.post(
   asyncHandler(async (req, res, next) => {
     validationHandler(req)
 
-    const { name, lastname, email, password, username } = req.body
+    const { name, lastname, email, password } = req.body
 
     let user = await UserModel.findOne({ email })
     if (user) return next(new BadRequestError('User already exists'))
@@ -50,7 +53,6 @@ router.post(
       lastname,
       email,
       avatar,
-      username,
       password,
     })
 
@@ -58,8 +60,14 @@ router.post(
     const salt = await bcrypt.genSalt(10)
     user.password = await bcrypt.hash(password, salt)
 
-    // save to db
+    // save new user to db
     user = await user.save()
+
+    // save/create new profile from user data
+    const profile = await ProfileModel({
+      user: user._id,
+      username: `${user.name}${user.lastname}${nanoid(5)}`,
+    })
 
     const payload = {
       user: {
@@ -70,7 +78,7 @@ router.post(
     // jwt sign and return token & user object in response to client
     jwt.sign(payload, jwtSecret, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err
-      res.status(201).send({ token, user })
+      res.status(201).send({ token, user, profile })
     })
   })
 )

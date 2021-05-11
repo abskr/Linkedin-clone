@@ -14,22 +14,26 @@ router.get(
   '/me',
   authGuard,
   asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findOne({
-      user: req.user.id,
-    }).populate('user', ['name', 'avatar'])
+    const profile = await ProfileModel.findById(req.user.id).populate('user', [
+      'name',
+      'avatar',
+    ])
 
     if (!profile) return next(new NotFoundError('No profile found for user'))
 
     res.status(200).send(profile)
   })
 )
+
 router.get(
   '/:username',
   authGuard,
   asyncHandler(async (req, res, next) => {
     const profile = await ProfileModel.findOne({
-      user: req.profile.username,
-    }).populate('user', ['name', 'avatar', 'username'])
+      username: req.params.username,
+    })
+      .populate('user', ['name', 'avatar', 'username'])
+      .find()
 
     if (!profile)
       return next(new NotFoundError('No profile found for this user'))
@@ -58,8 +62,12 @@ router.get(
   })
 )
 
+// @route  POST v1/profile
+// @desc   Create Profile for Registered User
+// @access Private
 router.post(
   '/',
+  authGuard,
   asyncHandler(async (req, res, next) => {
     const newProfile = new ProfileModel(req.body)
     const { _id } = await newProfile.save()

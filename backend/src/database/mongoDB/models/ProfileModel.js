@@ -6,6 +6,11 @@ const ProfileSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     title: {
       type: String,
     },
