@@ -12,6 +12,6 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sk-linkedin-clone"
-          heroku_email: ${{secrets.HEROKU_API_KEY}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
         env:
           HD_APP_BASE: "backend"
