@@ -1,3 +1,4 @@
+// Reusable react hook for login and token helper logic
 import { useState } from 'react'
 
 export default function useToken() {

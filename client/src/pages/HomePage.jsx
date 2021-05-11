@@ -30,6 +30,7 @@ export default class HomePage extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <motion.div
         initial={{ scaleY: 0.99, opacity: 0 }}
