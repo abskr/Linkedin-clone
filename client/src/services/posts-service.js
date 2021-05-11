@@ -3,7 +3,7 @@ import { baseURL } from '../config'
 
 export async function getAllPosts() {
   try {
-    const resp = await fetch(`${baseURL}`, {
+    const resp = await fetch(`${baseURL}/posts`, {
       method: 'GET',
       headers,
     })
@@ -21,7 +21,7 @@ export async function getAllPosts() {
 
 export async function addPost(postObj) {
   try {
-    const resp = await fetch(`${baseURL}`, {
+    const resp = await fetch(`${baseURL}/posts`, {
       method: 'POST',
       headers,
       body: JSON.stringify(postObj),
@@ -43,7 +43,7 @@ export async function addPost(postObj) {
 
 export async function deletePostById(id) {
   try {
-    const resp = await fetch(`${baseURL}/${id}`, {
+    const resp = await fetch(`${baseURL}/posts/${id}`, {
       method: 'DELETE',
       headers,
     })
