@@ -68,12 +68,11 @@ export default function HfPostCard({ post, handleDelete }) {
         >
           <div className="d-flex">
             <img
-              src="https://media-exp1.licdn.com/dms/image/C4D0BAQHIXTZd-0TR_A/company-logo_100_100/0/1576240838903?e=1625702400&v=beta&t=IdmQ7Ik_c6EdU9saYOr0ta7zt5FEL-_gQfbe5Z6zNX4"
-              alt="InterestLogo"
+              src={post.user.avatar}
               style={cardImage}
-            />{" "}
+            />{' '}
             <Name className="ml-2">
-              <h6>About</h6>
+              <h6>{post.user.username}</h6>
               <p>522,807 followers</p>
               <p className="timeAndIcons">
                 1h &bull;
@@ -165,13 +164,18 @@ export default function HfPostCard({ post, handleDelete }) {
           </button> */}
         </Card.Title>
         <Card.Text style={cardText}>{post.text}</Card.Text>
-        <div className="d-flex justify-content-center">
-          <Image
-            fluid
-            style={postImage}
-            src="https://via.placeholder.com/420x280/000000/FFFFFF/?text=LinkedIn+Blog+Post"
-          />
-        </div>
+        {post.image ? (
+          <div className="d-flex justify-content-center">
+            <Image
+              fluid
+              style={postImage}
+              src={post.image}
+            />
+          </div>
+        ) : (
+          <div className="d-flex justify-content-center">
+          </div>
+        )}
         <div className="d-inline-flex align-items-baseline">
           <LHRbutton>
             <img
@@ -210,7 +214,7 @@ export default function HfPostCard({ post, handleDelete }) {
         </SButton>
       </div>
     </Card>
-  );
+  )
 }
 
 const EButton = styled.image`

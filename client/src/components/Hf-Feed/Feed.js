@@ -39,7 +39,7 @@ const Feed = ({ handleSubmit, handleInput, postObj }) => {
               placeholder="Leave a Comment"
             ></Input>
             <Submit>
-              <button type="submit">Send</button>
+              <Button className="rounded-pill" type="submit" variant="outline-secondary">Post</Button>
             </Submit>
           </form>
         </FeedInput>

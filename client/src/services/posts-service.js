@@ -1,5 +1,5 @@
 import { headers } from './index.js'
-const _BASE_URL = 'https://striveschool-api.herokuapp.com/api/posts/'
+const _BASE_URL = 'http://localhost:5000/v1/posts'
 
 export async function getAllPosts() {
   try {
