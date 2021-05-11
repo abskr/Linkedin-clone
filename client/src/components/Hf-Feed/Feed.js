@@ -1,15 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import CreateIcon from "@material-ui/icons/Create";
-import EventNoteIcon from "@material-ui/icons/EventNote";
-import PhotoIcon from "@material-ui/icons/Photo";
-import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
-import DescriptionIcon from "@material-ui/icons/Description";
-import { green } from "@material-ui/core/colors";
-import { Form, Button } from "react-bootstrap";
+import React from 'react'
+import styled from 'styled-components'
+import CreateIcon from '@material-ui/icons/Create'
+import EventNoteIcon from '@material-ui/icons/EventNote'
+import PhotoIcon from '@material-ui/icons/Photo'
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
+import DescriptionIcon from '@material-ui/icons/Description'
+import { green } from '@material-ui/core/colors'
+import { Form, Button } from 'react-bootstrap'
 
 const Feed = ({ handleSubmit, handleInput, postObj }) => {
-  console.log(postObj);
   return (
     <Container>
       <FeedInputContainer>
@@ -64,18 +63,18 @@ const Feed = ({ handleSubmit, handleInput, postObj }) => {
         </InputOptions>
       </FeedInputContainer>
     </Container>
-  );
-};
+  )
+}
 
-export default Feed;
-const Container = styled.div``;
+export default Feed
+const Container = styled.div``
 const FeedInputContainer = styled.div`
   background-color: white;
   padding: 10px;
   paddin-bottom: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
-`;
+`
 const FeedInput = styled.div`
   border: 1px solid lightgray;
   border-radius: 30px;
@@ -87,14 +86,14 @@ const FeedInput = styled.div`
     display: flex;
     width: 100%;
   }
-`;
+`
 const ImageIcon = styled.div`
   img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
   }
-`;
+`
 const Input = styled.input`
   border: none;
   flex: 1;
@@ -104,10 +103,10 @@ const Input = styled.input`
   :focus {
     outline: none;
   }
-`;
+`
 const Submit = styled.div`
   display: block;
-`;
+`
 const InputOptions = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -116,32 +115,32 @@ const InputOptions = styled.div`
   margin-top: 15px;
   cursor: pointer;
   padidn: 10px;
-`;
+`
 const Photo = styled.div`
   :hover {
     background-color: whitesmoke;
     border-radius: 10px;
     padding: 2px;
   }
-`;
+`
 const Video = styled.div`
   :hover {
     background-color: whitesmoke;
     border-radius: 10px;
     padding: 2px;
   }
-`;
+`
 const Event = styled.div`
   :hover {
     background-color: whitesmoke;
     border-radius: 10px;
     padding: 2px;
   }
-`;
+`
 const Article = styled.div`
   :hover {
     padding: 2px;
     background-color: whitesmoke;
     border-radius: 10px;
   }
-`;
+`
