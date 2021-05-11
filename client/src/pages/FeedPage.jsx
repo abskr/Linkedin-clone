@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import RollerSpinner from '../components/shared/spinners/RollerSpinner'
 
 // components
-import AdsBar from 'components/shared/ads-bar/AdsBar'
+import AdsBar from 'components/shared/adsbar/AdsBar'
 import HfLeftBar from 'components/Hf-leftBar/HfLeftBar'
 import Feed from 'components/Hf-Feed/Feed'
 import RightHpBar from 'components/Hf-RightBar/RightHpBar'
@@ -16,7 +16,7 @@ import Promoted from 'components/Pv-Promoted/Promoted'
 import HfPostFeedContainer from '../containers/hf-postFeedContainer/HfPostFeedContainer'
 import axios from 'axios'
 
-export default class HomePage extends Component {
+export default class FeedPage extends Component {
   state = {
     loading: true,
     posts: [],
