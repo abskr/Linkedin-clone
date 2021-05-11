@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: rgb(245, 245, 245);
+  background-color: #f3f2ef !important;
 }
 
 .backdrop {

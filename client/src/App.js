@@ -13,6 +13,7 @@ const Topnav = React.lazy(() =>
 const HomePage = React.lazy(() => import('./pages/HomePage'))
 const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
 const AdminPage = React.lazy(() => import('./pages/AdminPage'))
+const SignupPage = React.lazy(() => import('./pages/SignupPage.jsx'))
 
 function App() {
   const [user, setUser] = useState({})
@@ -26,10 +27,10 @@ function App() {
   if (!localStorage.getItem('token'))
     return (
       <Suspense fallback={<RollerSpinner />}>
-        <LoginPage setUser={setUser} />
+        <SignupPage setUser={setUser} />
       </Suspense>
     )
-
+  
   return (
     <Suspense fallback={<RollerSpinner />}>
       <div className="App">
@@ -54,6 +55,13 @@ function App() {
             exact
             path="/"
             render={(routerProps) => <HomePage {...routerProps} user={user} />}
+          />
+          <Route
+            exact
+            path="/sign-up"
+            render={(routerProps) => (
+              <SignupPage {...routerProps} user={user} />
+            )}
           />
           <Route
             exact
