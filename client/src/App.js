@@ -7,10 +7,8 @@ import axios from 'axios'
 import { baseURL } from 'config'
 
 const LoginPage = React.lazy(() => import('./pages/LoginPage.jsx'))
-const Topnav = React.lazy(() =>
-  import('./components/shared/top-navbar/TopNavbar')
-)
-const HomePage = React.lazy(() => import('./pages/HomePage'))
+const Topnav = React.lazy(() => import('./components/shared/navbar/TopNavbar'))
+const FeedPage = React.lazy(() => import('./pages/FeedPage.jsx'))
 const ProfilePage = React.lazy(() => import('./pages/ProfilePage'))
 const AdminPage = React.lazy(() => import('./pages/AdminPage'))
 const SignupPage = React.lazy(() => import('./pages/SignupPage.jsx'))
@@ -54,7 +52,7 @@ function App() {
           <Route
             exact
             path="/"
-            render={(routerProps) => <HomePage {...routerProps} user={user} />}
+            render={(routerProps) => <FeedPage {...routerProps} user={user} />}
           />
           <Route
             exact
