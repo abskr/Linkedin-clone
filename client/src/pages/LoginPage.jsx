@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import useToken from '../hooks/useToken.js'
+import {Button, Col, Container, Form, Row} from 'react-bootstrap'
+import linkedInLgLogo from "../assets/LinkedinSVG's/linkedInLargeLogo.svg"
 
 export default function Login({ setUser, ...props }) {
   const { saveToken } = useToken()
@@ -34,24 +36,50 @@ export default function Login({ setUser, ...props }) {
   }
 
   return (
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Email</p>
-          <input type="text" onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
+    <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ height: '100vh' }}
+    >
+      <Row className="border p-3" rounded md={{ span: 6, offset: 3 }}>
+      <img className="m-1" height={16} src={linkedInLgLogo} />
+        <Col xs={12}>
+          <div className="login-wrapper">
+            <h1 className="mb-0">Log in</h1>
+            <small>Always up-to-date information from your working world</small>
+            <Row className="mt-2">
+              <Col xs={12}>
+                <Form onSubmit={handleSubmit}>
+                  <label className="d-block" style={{ width: '100%' }}>
+                    <Form.Control
+                      type="text"
+                      placeholder="E-Mail adress or phone number"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </label>
+                  <label className="d-block" style={{ width: '100%' }}>
+                    <Form.Control
+                      type="password"
+                      placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </label>
+                  <div>
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      block
+                      type="submit"
+                      className="rounded-pill"
+                    >
+                      Log in
+                    </Button>
+                  </div>
+                </Form>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   )
 }
