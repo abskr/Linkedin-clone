@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Container } from 'react-bootstrap'
 import { motion } from 'framer-motion'
-import PVExperienceListContainer from 'containers/pv-experience-card/PVExperienceListContainer'
+import ProfileExperienceContainer from 'components/profile/experience-card/ProfileExperienceContainer.jsx'
 
 export default class AdminPage extends Component {
   state = {
-    loading: true
+    loading: true,
   }
 
   render() {
@@ -18,7 +18,7 @@ export default class AdminPage extends Component {
       >
         <Container>
           <h3>AdminPage</h3>
-          <PVExperienceListContainer />
+          <ProfileExperienceContainer />
         </Container>
       </motion.div>
     )

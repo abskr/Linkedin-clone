@@ -6,14 +6,14 @@ import RollerSpinner from '../components/shared/spinners/RollerSpinner'
 
 // components
 import AdsBar from 'components/shared/adsbar/AdsBar'
-import HfLeftBar from 'components/Hf-leftBar/HfLeftBar'
-import Feed from 'components/Hf-Feed/Feed'
-import RightHpBar from 'components/Hf-RightBar/RightHpBar'
-import HfFooter from 'components/Hf-Footer/HfFooter'
-import Promoted from 'components/Pv-Promoted/Promoted'
+import FeedLeftBar from 'components/feed/FeedLeftBar.js'
+import Feed from 'components/feed/Feed.js'
+import FeedRightBar from 'components/feed/FeedRightBar.js'
+import FeedFooter from 'components/feed/FeedFooter.js'
+import ProfilePromoted from 'components/profile/ProfilePromoted.js'
 
 // containers
-import HfPostFeedContainer from '../containers/hf-postFeedContainer/HfPostFeedContainer'
+import FeedPostFeedContainer from '../components/feed/FeedPostFeedContainer.jsx'
 import axios from 'axios'
 
 export default class FeedPage extends Component {
@@ -47,16 +47,16 @@ export default class FeedPage extends Component {
           </Row>
           <Row className="mt-4">
             <Col xs={12} sm={12} md={3}>
-              <HfLeftBar />
+              <FeedLeftBar />
             </Col>
             <Col xs={12} md={6}>
               {/* <HFWritePostContainer /> */}
-              <HfPostFeedContainer />
+              <FeedPostFeedContainer />
             </Col>
             <Col xs={12} md={3}>
-              <RightHpBar />
-              <Promoted />
-              <HfFooter />
+              <FeedRightBar />
+              <ProfilePromoted />
+              <FeedFooter />
             </Col>
           </Row>
         </Container>
