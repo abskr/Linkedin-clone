@@ -3,6 +3,8 @@ import RollerSpinner from 'components/shared/spinners/RollerSpinner'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios'
+import { baseURL } from 'config'
 
 const LoginPage = React.lazy(() => import('./pages/LoginPage.jsx'))
 const Topnav = React.lazy(() =>
@@ -15,6 +17,11 @@ const AdminPage = React.lazy(() => import('./pages/AdminPage'))
 function App() {
   const [user, setUser] = useState({})
   const location = useLocation()
+
+  useEffect(async () => {
+    const { data } = await axios.get(`${baseURL}/users`)
+    console.log(data)
+  }, [])
 
   if (!localStorage.getItem('token'))
     return (

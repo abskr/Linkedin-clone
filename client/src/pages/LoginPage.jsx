@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import useToken from '../hooks/useToken.js'
 import {Button, Col, Container, Form, Row} from 'react-bootstrap'
 import linkedInLgLogo from "../assets/LinkedinSVG's/linkedInLargeLogo.svg"
+import { baseURL } from '../config'
 
 export default function Login({ setUser, ...props }) {
   const { saveToken } = useToken()
@@ -12,7 +13,7 @@ export default function Login({ setUser, ...props }) {
   const [password, setPassword] = useState()
 
   const loginUser = async (credentials) => {
-    const resp = await fetch('http://localhost:5000/v1/auth', {
+    const resp = await fetch(`${baseURL}/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
