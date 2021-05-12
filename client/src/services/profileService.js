@@ -3,7 +3,7 @@ import { baseURL } from '../config'
 
 export async function getAllProfiles() {
   try {
-    const resp = await fetch(`${baseURL}/profile/profiles`, {
+    const resp = await fetch(`${baseURL}/profiles/`, {
       method: 'GET',
       headers,
     })
