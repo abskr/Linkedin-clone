@@ -7,7 +7,7 @@ import { checkSchema } from 'express-validator'
 import multer from 'multer'
 import { v2 as cloudinary } from "cloudinary"
 import { CloudinaryStorage } from "multer-storage-cloudinary"
-import { generatePdf } from "../../../services/email/index.js"
+import { generatePdf } from "../../../services/pdf/index.js"
 const router = express.Router()
 const cloudStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
