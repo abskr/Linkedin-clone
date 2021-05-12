@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { addPost } from '../../services/posts-service.js'
+import { addPost } from '../../services/postService.js'
 import Feed from './Feed.js'
-import { getMyProfile } from '../../services/users-service.js'
-import { getAllPosts } from '../../services/posts-service.js'
+import { getMyProfile } from '../../services/profileService.js'
+import { getAllPosts } from '../../services/postService.js'
 import HfWritePostForm from 'components/shared/forms/HfWritePostForm.jsx'
 
 export default class FeedWritePostContainer extends Component {

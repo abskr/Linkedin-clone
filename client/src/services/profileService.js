@@ -1,17 +1,18 @@
 import { headers } from './index.js'
-const _BASE_URL = 'https://striveschool-api.herokuapp.com/api/profile/'
+import { baseURL } from '../config'
 
 export async function getAllProfiles() {
   try {
-    const resp = await fetch(`${_BASE_URL}`, {
+    const resp = await fetch(`${baseURL}/profile/profiles`, {
       method: 'GET',
       headers,
     })
     if (resp.ok) {
+      console.log('PROFILE SERVICE: ')
       const data = await resp.json()
       return data.filter((user) => user.area)
     } else {
-      console.error('an error occured')
+      console.error(`No users found`)
     }
   } catch (error) {
     console.error(error)
@@ -20,7 +21,7 @@ export async function getAllProfiles() {
 
 export async function getProfileByUserId(userId) {
   try {
-    const resp = await fetch(`${_BASE_URL}/${userId}`, {
+    const resp = await fetch(`${baseURL}/${userId}`, {
       method: 'GET',
       headers,
     })
@@ -36,7 +37,7 @@ export async function getProfileByUserId(userId) {
 
 export async function getMyProfile() {
   try {
-    const resp = await fetch(`${_BASE_URL}/me`, {
+    const resp = await fetch(`${baseURL}/me`, {
       method: 'GET',
       headers,
     })

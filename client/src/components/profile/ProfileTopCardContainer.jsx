@@ -1,5 +1,5 @@
 import React, { Component, Suspense, lazy } from 'react'
-import { getProfileByUserId } from 'services/users-service.js'
+import { getProfileByUserId } from 'services/profileService.js'
 import RollerSpinner from 'components/shared/spinners/RollerSpinner.jsx'
 
 // components
