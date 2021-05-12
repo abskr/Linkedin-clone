@@ -7,25 +7,6 @@ import { checkSchema } from 'express-validator'
 
 const router = express.Router()
 
-// @route  POST v1/profiles/username/:username
-// @desc   Get profile by username
-// @access Public
-router.get(
-  '/username/:username',
-  asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findOne({
-      username: req.params.username,
-    })
-      .populate('user', ['name', 'avatar', 'username'])
-      .find()
-
-    if (!profile)
-      return next(new NotFoundError('No profile found for this user'))
-
-    res.status(200).send(profile)
-  })
-)
-
 // @route  POST v1/profiles
 // @desc   Get all profiles
 // @access Public
@@ -40,29 +21,11 @@ router.get(
   })
 )
 
-// @route  GET v1/profile/me
-// @desc   Get current users profile
-// @access Private
-router.get(
-  '/me',
-  authGuard,
-  asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findById(req.user.id).populate('user', [
-      'name',
-      'avatar',
-    ])
-
-    if (!profile) return next(new NotFoundError('No profile found for user'))
-
-    res.status(200).send(profile)
-  })
-)
-
 // @route  POST v1/profiles/id/:id
 // @desc   Get profile by ID
 // @access Private
 router.get(
-  '/id/:id',
+  '/me',
   authGuard,
   asyncHandler(async (req, res, next) => {
     const id = req.params.id
@@ -87,11 +50,30 @@ router.post(
   })
 )
 
+// @route  POST v1/profiles/username/:username
+// @desc   Get profile by username
+// @access Public
+router.get(
+  '/:username',
+  asyncHandler(async (req, res, next) => {
+    const profile = await ProfileModel.findOne({
+      username: req.params.username,
+    })
+      .populate('user', ['name', 'avatar', 'username'])
+      .find()
+
+    if (!profile)
+      return next(new NotFoundError('No profile found for this user'))
+
+    res.status(200).send(profile)
+  })
+)
+
 // @route  GET v1/profiles/id/:id
 // @desc   Get profile by id
 // @access Private
 router.put(
-  '/id/:id',
+  '/:id',
   authGuard,
   asyncHandler(async (req, res, next) => {
     const profile = await ProfileModel.findByIdAndUpdate(

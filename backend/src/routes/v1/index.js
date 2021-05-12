@@ -15,6 +15,6 @@ router.use('/auth', authRoutes)
 router.use('/users', userRoutes)
 router.use('/posts', postsRoutes)
 router.use('/profiles', profileRoutes)
-router.use('/experiences', experienceRoutes)
+router.use('/experience', experienceRoutes)
 
 export default router
