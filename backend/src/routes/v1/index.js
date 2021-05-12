@@ -3,6 +3,7 @@ import authRoutes from './auth/authRoutes.js'
 import userRoutes from './users/userRoutes.js'
 import postsRoutes from './posts/postRoutes.js'
 import profileRoutes from './profile/profileRoutes.js'
+import experienceRoutes from './experience/experienceRoutes.js'
 
 const router = express.Router()
 
@@ -12,7 +13,8 @@ const router = express.Router()
 
 router.use('/auth', authRoutes)
 router.use('/users', userRoutes)
-router.use('/profile', profileRoutes)
 router.use('/posts', postsRoutes)
+router.use('/profile', profileRoutes)
+router.use('/experiences', experienceRoutes)
 
 export default router
