@@ -36,6 +36,20 @@ const iconStyles = {
 
 const likeHeartPraiseImg = {
   width: '16px',
+  display: 'inline-block',
+  border: 'none',
+  borderRadius: '2%',
+  padding: '0.1rem',
+  margin: '0',
+  textDecoration: 'none',
+  background: 'none',
+  color: '#ffffff',
+  fontFamily: 'sans-serif',
+  fontSize: '1rem',
+  cursor: 'pointer',
+  textAlign: 'center',
+  transition: 'background 250ms ease-in-out, transform 150ms ease'
+
   //   margin: "0",
   //   padding: "0",
   //   verticalAlign: "middle",
