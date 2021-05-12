@@ -30,10 +30,12 @@ const router = express.Router()
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
-      const posts = await PostModel.find().populate('user', ['name', 'lastname', 'avatar'])
-      if (!posts) return next(new NotFoundError('No post yet!'))
-      res.status(200).send(posts)
-  }))
+    const posts = await PostModel.find().populate('user', ['name','lastname','avatar'])
+    if (!posts) return next(new NotFoundError('No post yet!'))
+    //console.log(PostModel)
+    res.status(200).send(posts)
+  })
+)
 
 // @route  POST v1/posts
 // @desc   Test route

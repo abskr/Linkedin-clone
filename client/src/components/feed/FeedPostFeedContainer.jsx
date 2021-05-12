@@ -1,10 +1,10 @@
 import React, { Component, Suspense } from 'react'
-import { getAllPosts, addPost, deletePostById } from 'services/posts-service.js'
+import { getAllPosts, addPost, deletePostById } from 'services/postService.js'
 
 import RollerSpinner from 'components/shared/spinners/RollerSpinner.jsx'
 //import Feed from '../../components/Hf-Feed/Feed'
 
-const HfPostCard = React.lazy(() =>
+const FeedPostCard = React.lazy(() =>
   import('components/feed/post-card/FeedPostCard.jsx')
 )
 
@@ -69,7 +69,7 @@ export default class FeedPostFeedContainer extends Component {
           .slice(-20)
           .reverse()
           .map((post) => (
-            <HfPostCard
+            <FeedPostCard
               key={post._id}
               post={post}
               handleDelete={this.handleDelete}

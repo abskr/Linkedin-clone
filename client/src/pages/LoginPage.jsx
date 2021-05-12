@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 import useToken from '../hooks/useToken.js'
-import {Button, Col, Container, Form, Row} from 'react-bootstrap'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import linkedInLgLogo from "../assets/LinkedinSVG's/linkedInLargeLogo.svg"
 import { baseURL } from '../config'
 
-export default function Login({ setUser, ...props }) {
+export default function Login({ setUser }) {
   const { saveToken } = useToken()
   const history = useHistory()
   const [email, setEmail] = useState()
@@ -53,7 +53,7 @@ export default function Login({ setUser, ...props }) {
                   <label className="d-block" style={{ width: '100%' }}>
                     <Form.Control
                       type="text"
-                      placeholder="E-Mail adress or phone number"
+                      placeholder="E-Mail address or phone number"
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </label>

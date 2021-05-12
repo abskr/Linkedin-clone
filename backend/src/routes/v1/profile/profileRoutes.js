@@ -4,8 +4,51 @@ import { NotFoundError } from '../../../core/apiErrors.js'
 import { authGuard } from '../../../guard/authGuard.js'
 import ProfileModel from '../../../database/mongoDB/models/ProfileModel.js'
 import { checkSchema } from 'express-validator'
-
+import multer from 'multer'
+import { v2 as cloudinary } from "cloudinary"
+import { CloudinaryStorage } from "multer-storage-cloudinary"
+import { generatePdf } from "../../../services/email/index.js"
 const router = express.Router()
+const cloudStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "strive",
+  },
+})
+const cloudMulter = multer({ storage: cloudStorage })
+
+// @route  POST v1/profiles/username/:username
+// @desc   Get profile by username
+// @access Public
+router.get(
+  '/username/:username',
+  asyncHandler(async (req, res, next) => {
+    const profile = await ProfileModel.findOne({
+      username: req.params.username,
+    })
+      .populate('user', ['name', 'avatar', 'username'])
+      .find()
+
+    if (!profile)
+      return next(new NotFoundError('No profile found for this user'))
+
+    res.status(200).send(profile)
+  })
+)
+
+// @route  POST v1/profiles
+// @desc   Get all profiles
+// @access Public
+router.get(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    console.log('profiles hit')
+    const profiles = await ProfileModel.find()
+    if (!profiles) return next(new NotFoundError('No profiles found!'))
+
+    res.status(200).send(profiles)
+  })
+)
 
 // @route  GET v1/profile/me
 // @desc   Get current users profile
@@ -25,34 +68,12 @@ router.get(
   })
 )
 
+// @route  POST v1/profiles/id/:id
+// @desc   Get profile by ID
+// @access Private
 router.get(
-  '/:username',
+  '/id/:id',
   authGuard,
-  asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findOne({
-      username: req.params.username,
-    })
-      .populate('user', ['name', 'avatar', 'username'])
-      .find()
-
-    if (!profile)
-      return next(new NotFoundError('No profile found for this user'))
-
-    res.status(200).send(profile)
-  })
-)
-router.get(
-  '/profiles',
-  asyncHandler(async (req, res, next) => {
-    const profiles = await ProfileModel.find()
-    if (!profiles) return next(new NotFoundError('No profiles found!'))
-
-    res.status(200).send(profiles)
-  })
-)
-
-router.get(
-  '/:id',
   asyncHandler(async (req, res, next) => {
     const id = req.params.id
     const profile = await ProfileModel.findById(id)
@@ -62,7 +83,7 @@ router.get(
   })
 )
 
-// @route  POST v1/profile
+// @route  POST v1/profiles
 // @desc   Create Profile for Registered User
 // @access Private
 router.post(
@@ -76,8 +97,11 @@ router.post(
   })
 )
 
+// @route  GET v1/profiles/id/:id
+// @desc   Get profile by id
+// @access Private
 router.put(
-  '/:id',
+  '/id/:id',
   authGuard,
   asyncHandler(async (req, res, next) => {
     const profile = await ProfileModel.findByIdAndUpdate(
@@ -103,5 +127,15 @@ router.delete(
     res.status(200).send('deleted')
   })
 )
+
+router.get("/:id/exportPDF", async (req, res, next) => {
+  try {
+    await generatePdf({})
+    res.send("PDF Generated")
+  } catch (error) {
+    next(error)
+  }
+})
+
 
 export default router

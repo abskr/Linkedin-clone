@@ -5,12 +5,12 @@ import ProfileExperienceListItem from 'components/profile/experience-card/Profil
 import PVAddExperienceForm from 'components/shared/forms/PVAddExperienceForm.jsx'
 
 // services
-import { getAllExperienceByUserId } from 'services/experience-service.js'
-import { getAllProfiles } from 'services/users-service.js'
+import { getAllExperienceByUserId } from 'services/experienceService.js'
+import { getAllProfiles } from 'services/profileService.js'
 import {
   addExperience,
   deleteExperienceById,
-} from 'services/experience-service.js'
+} from 'services/experienceService.js'
 import { Flag } from '@material-ui/icons'
 
 const USER_ID = '606c4b4b6fd22800153fdbcf'
