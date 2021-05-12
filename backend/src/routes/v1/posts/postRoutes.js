@@ -9,6 +9,7 @@ import { authGuard } from "../../../guard/authGuard.js";
 import cloudinary from "../../../services/image/cloudinaryUpload.js"
 import CloudinaryStorage from "multer-storage-cloudinary"
 import multer from "multer"
+import q2m from 'query-to-mongo'
 
 const router = express.Router()
 
@@ -44,11 +45,10 @@ router.post(
   [authGuard, checkSchema(postValidator)],
   asyncHandler(async (req, res, next) => {
     validationHandler(req)
-
+    req.body.user = req.user.id
     const newPost = new PostModel(req.body)
-    newPost.user = req.user.id
     const { _id } = await newPost.save()
-    res.status(200).send(newPost)
+    res.status(200).send(`${_id} is saved`)
   })
 )
 
