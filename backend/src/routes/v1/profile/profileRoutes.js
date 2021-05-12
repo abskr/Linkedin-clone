@@ -7,6 +7,39 @@ import { checkSchema } from 'express-validator'
 
 const router = express.Router()
 
+// @route  POST v1/profiles/username/:username
+// @desc   Get profile by username
+// @access Public
+router.get(
+  '/username/:username',
+  asyncHandler(async (req, res, next) => {
+    const profile = await ProfileModel.findOne({
+      username: req.params.username,
+    })
+      .populate('user', ['name', 'avatar', 'username'])
+      .find()
+
+    if (!profile)
+      return next(new NotFoundError('No profile found for this user'))
+
+    res.status(200).send(profile)
+  })
+)
+
+// @route  POST v1/profiles
+// @desc   Get all profiles
+// @access Public
+router.get(
+  '/',
+  asyncHandler(async (req, res, next) => {
+    console.log('profiles hit')
+    const profiles = await ProfileModel.find()
+    if (!profiles) return next(new NotFoundError('No profiles found!'))
+
+    res.status(200).send(profiles)
+  })
+)
+
 // @route  GET v1/profile/me
 // @desc   Get current users profile
 // @access Private
@@ -25,34 +58,12 @@ router.get(
   })
 )
 
+// @route  POST v1/profiles/id/:id
+// @desc   Get profile by ID
+// @access Private
 router.get(
-  '/:username',
+  '/id/:id',
   authGuard,
-  asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findOne({
-      username: req.params.username,
-    })
-      .populate('user', ['name', 'avatar', 'username'])
-      .find()
-
-    if (!profile)
-      return next(new NotFoundError('No profile found for this user'))
-
-    res.status(200).send(profile)
-  })
-)
-router.get(
-  '/profiles',
-  asyncHandler(async (req, res, next) => {
-    const profiles = await ProfileModel.find()
-    if (!profiles) return next(new NotFoundError('No profiles found!'))
-
-    res.status(200).send(profiles)
-  })
-)
-
-router.get(
-  '/:id',
   asyncHandler(async (req, res, next) => {
     const id = req.params.id
     const profile = await ProfileModel.findById(id)
@@ -62,7 +73,7 @@ router.get(
   })
 )
 
-// @route  POST v1/profile
+// @route  POST v1/profiles
 // @desc   Create Profile for Registered User
 // @access Private
 router.post(
@@ -76,8 +87,11 @@ router.post(
   })
 )
 
+// @route  GET v1/profiles/id/:id
+// @desc   Get profile by id
+// @access Private
 router.put(
-  '/:id',
+  '/id/:id',
   authGuard,
   asyncHandler(async (req, res, next) => {
     const profile = await ProfileModel.findByIdAndUpdate(

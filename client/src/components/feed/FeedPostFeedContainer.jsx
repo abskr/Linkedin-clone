@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react'
-import { getAllPosts, addPost, deletePostById } from 'services/posts-service.js'
+import { getAllPosts, addPost, deletePostById } from 'services/postService.js'
 
 import RollerSpinner from 'components/shared/spinners/RollerSpinner.jsx'
 //import Feed from '../../components/Hf-Feed/Feed'
