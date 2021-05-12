@@ -73,6 +73,7 @@ const dropDownText = {
 }
 
 export default function FeedPostCard({ post, handleDelete }) {
+  console.log(post)
   return (
     <Card bg="white" text="black" className="my-3 card-radius">
       <Card.Body className="px-3 pt-2 pb-0">
@@ -81,9 +82,19 @@ export default function FeedPostCard({ post, handleDelete }) {
           style={cardTitle}
         >
           <div className="d-flex">
-            <img src={post.user.avatar} style={cardImage} />{' '}
+            {post.user ? (
+              <img src={post.user.avatar} alt="avatar" style={cardImage} />
+            ) : (
+              <img
+                src="https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
+                alt="avatar"
+                style={cardImage}
+              />
+            )}
             <Name className="ml-2">
-              <h6>{post.user.username}</h6>
+              {(post.user)
+              ? <h6>{post.user.name} {post.user.lastname}</h6>
+              : <h6>How come you dont have a name?</h6>}
               <p>522,807 followers</p>
               <p className="timeAndIcons">
                 1h &bull;
@@ -308,3 +319,127 @@ const Name = styled.div`
 const ListItem = styled.li`
   width: 320px;
 `
+
+// const cardTitle = {
+//   fontSize: '20px',
+//   fontWeight: '400',
+// }
+
+// const cardText = {
+//   fontSize: '14px',
+//   fontWeight: '400',
+// }
+
+// const cardImage = {
+//   maxHeight: '48px',
+// }
+
+// const postImage = {
+//   width: '100%',
+//   //   maxHeight: "280px",
+// }
+
+// const iconStyles = {
+//   marginRight: '5px',
+//   fontSize: '25px',
+// }
+
+// const likeHeartPraiseImg = {
+//   width: '16px',
+//   display: 'inline-block',
+//   border: 'none',
+//   borderRadius: '2%',
+//   padding: '0.1rem',
+//   margin: '0',
+//   textDecoration: 'none',
+//   background: 'none',
+//   color: '#ffffff',
+//   fontFamily: 'sans-serif',
+//   fontSize: '1rem',
+//   cursor: 'pointer',
+//   textAlign: 'center',
+//   transition: 'background 250ms ease-in-out, transform 150ms ease'
+
+//   //   margin: "0",
+//   //   padding: "0",
+//   //   verticalAlign: "middle",
+// }
+
+// const commentsText = {
+//   fontSize: '12px',
+//   fontWeight: '400',
+//   color: 'rgba(128, 128, 128, 1)',
+//   //   marginLeft: "3%",
+//   marginTop: '8%',
+// }
+
+// const dropDownHeading = {
+//   fontSize: '16px',
+// }
+
+// const dropDownText = {
+//   fontSize: '12px',
+//   marginBottom: '2%',
+// }
+
+// const cardTitle = {
+//   fontSize: '20px',
+//   fontWeight: '400',
+// }
+
+// const cardText = {
+//   fontSize: '14px',
+//   fontWeight: '400',
+// }
+
+// const cardImage = {
+//   maxHeight: '48px',
+// }
+
+// const postImage = {
+//   width: '100%',
+//   //   maxHeight: "280px",
+// }
+
+// const iconStyles = {
+//   marginRight: '5px',
+//   fontSize: '25px',
+// }
+
+// const likeHeartPraiseImg = {
+//   width: '16px',
+//   display: 'inline-block',
+//   border: 'none',
+//   borderRadius: '2%',
+//   padding: '0.1rem',
+//   margin: '0',
+//   textDecoration: 'none',
+//   background: 'none',
+//   color: '#ffffff',
+//   fontFamily: 'sans-serif',
+//   fontSize: '1rem',
+//   cursor: 'pointer',
+//   textAlign: 'center',
+//   transition: 'background 250ms ease-in-out, transform 150ms ease'
+
+//   //   margin: "0",
+//   //   padding: "0",
+//   //   verticalAlign: "middle",
+// }
+
+// const commentsText = {
+//   fontSize: '12px',
+//   fontWeight: '400',
+//   color: 'rgba(128, 128, 128, 1)',
+//   //   marginLeft: "3%",
+//   marginTop: '8%',
+// }
+
+// const dropDownHeading = {
+//   fontSize: '16px',
+// }
+
+// const dropDownText = {
+//   fontSize: '12px',
+//   marginBottom: '2%',
+// }
