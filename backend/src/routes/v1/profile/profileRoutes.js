@@ -4,8 +4,18 @@ import { NotFoundError } from '../../../core/apiErrors.js'
 import { authGuard } from '../../../guard/authGuard.js'
 import ProfileModel from '../../../database/mongoDB/models/ProfileModel.js'
 import { checkSchema } from 'express-validator'
-
+import multer from 'multer'
+import { v2 as cloudinary } from "cloudinary"
+import { CloudinaryStorage } from "multer-storage-cloudinary"
+import { generatePdf } from "../../../services/email/index.js"
 const router = express.Router()
+const cloudStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "strive",
+  },
+})
+const cloudMulter = multer({ storage: cloudStorage })
 
 // @route  POST v1/profiles/username/:username
 // @desc   Get profile by username
@@ -117,5 +127,15 @@ router.delete(
     res.status(200).send('deleted')
   })
 )
+
+router.get("/:id/exportPDF", async (req, res, next) => {
+  try {
+    await generatePdf({})
+    res.send("PDF Generated")
+  } catch (error) {
+    next(error)
+  }
+})
+
 
 export default router
