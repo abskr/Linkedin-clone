@@ -1,10 +1,12 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState, useContext } from 'react'
 import RollerSpinner from 'components/shared/spinners/RollerSpinner'
 import { Route, Switch, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import { baseURL } from 'config'
+
+import { useAuth } from './hooks/contexts/AuthContext.js'
 
 const LoginPage = React.lazy(() => import('./pages/LoginPage.jsx'))
 const Topnav = React.lazy(() => import('./components/shared/navbar/TopNavbar'))
@@ -14,18 +16,20 @@ const AdminPage = React.lazy(() => import('./pages/AdminPage'))
 const SignupPage = React.lazy(() => import('./pages/SignupPage.jsx'))
 
 function App() {
-  const [user, setUser] = useState({})
+  const { user, registerUser, getUsers } = useAuth()
+  //const [user, setUser] = useState({})
   const location = useLocation()
 
   useEffect(async () => {
     const { data } = await axios.get(`${baseURL}/users`)
-    console.log(data)
+    //registerUser('sean@test.com', '123456', 'Sean', 'Knowles')
+    console.log(getUsers())
   }, [])
 
   if (!localStorage.getItem('token'))
     return (
       <Suspense fallback={<RollerSpinner />}>
-        <LoginPage setUser={setUser} />
+        <LoginPage setUser={registerUser} />
       </Suspense>
     )
 

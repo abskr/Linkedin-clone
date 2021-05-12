@@ -1,27 +1,29 @@
-import React, { Component, Suspense, lazy } from 'react'
+import React, { useState, Suspense, lazy, useEffect } from 'react'
 import { getProfileByUserId } from 'services/profileService.js'
 import RollerSpinner from 'components/shared/spinners/RollerSpinner.jsx'
 
 // components
 const PVTopCard = lazy(() => import('components/profile/ProfileTopCard.jsx'))
 
-export default class ProfileTopCardContainer extends Component {
-  state = {
-    loading: true,
-    user: {},
+export default function ProfileTopCardContainer({ user }) {
+  const [profiles, setProfile] = useState({})
+
+  useEffect(() => {
+    fetchProfiles()
+  }, [])
+
+  const fetchProfiles = async () => {
+    const userProfile = await getProfileByUserId(user._id)
+    setProfile(userProfile)
   }
 
-  async componentDidMount() {
-    const userProfile = await getProfileByUserId('606c4b4b6fd22800153fdbcf')
-    this.setState({ ...this.state, user: userProfile })
-  }
-  render() {
-    return (
-      <div style={{ position: 'relative' }}>
-        <Suspense fallback={<RollerSpinner />}>
-          <PVTopCard {...this.state.user} />
-        </Suspense>
-      </div>
-    )
-  }
+  console.log(profiles)
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <Suspense fallback={<RollerSpinner />}>
+        <PVTopCard {...profiles} />
+      </Suspense>
+    </div>
+  )
 }

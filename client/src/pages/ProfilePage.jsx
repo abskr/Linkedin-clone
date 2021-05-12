@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 
@@ -22,47 +22,45 @@ import ProfileLearning from 'components/profile/ProfileLearning.js'
 import ProfileSkillsCard from 'components/profile/ProfileSkillsCard.jsx'
 import ProfileExperienceContainer from 'components/profile/experience-card/ProfileExperienceContainer.jsx'
 
-export default class ProfilePage extends Component {
-  render() {
-    return (
-      <motion.div
-        initial={{ scaleY: 0.99, opacity: 0 }}
-        animate={{ scaleY: 1, opacity: 1 }}
-        exit={{ scaleY: 0.99, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <Container className="pl-0 pr-0">
-          <Row className="m-3">
-            <Col>
-              <AdsBar />
-            </Col>
-          </Row>
-          <Row className="mt-4">
-            <Col xs={12} sm={12} md={8}>
-              {/*<ProfileTopCardContainer />*/}
-              <ProfileAboutCard setShowModal={this.props.setShowModal} />
-              <PvDashboard />
-              <ProfileActivity />
-              {/*<ProfileExperienceContainer*/}
-              {/*  setShowModal={this.props.setShowModal}*/}
-              {/*/>*/}
-              <Interests />
-              <ProfileSkillsCard />
-            </Col>
-            <Col xs={12} md={4}>
-              <ProfileContent />
-              <ProfilePromoted />
-              <ProfileAdCard />
-              <PeopleYouKnowContainer />
-              <ProfilePalsoV />
-              <ProfileLearning />
-            </Col>
-          </Row>
-          <Row>
-            <Footer />
-          </Row>
-        </Container>
-      </motion.div>
-    )
-  }
+export default function ProfilePage({ user, ...props }) {
+  return (
+    <motion.div
+      initial={{ scaleY: 0.99, opacity: 0 }}
+      animate={{ scaleY: 1, opacity: 1 }}
+      exit={{ scaleY: 0.99, opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <Container className="pl-0 pr-0">
+        <Row className="m-3">
+          <Col>
+            <AdsBar />
+          </Col>
+        </Row>
+        <Row className="mt-4">
+          <Col xs={12} sm={12} md={8}>
+            <ProfileTopCardContainer user={user} />
+            <ProfileAboutCard setShowModal={props.setShowModal} />
+            <PvDashboard />
+            <ProfileActivity />
+            {/*<ProfileExperienceContainer*/}
+            {/*  setShowModal={this.props.setShowModal}*/}
+            {/*/>*/}
+            <Interests />
+            <ProfileSkillsCard />
+          </Col>
+          <Col xs={12} md={4}>
+            <ProfileContent />
+            <ProfilePromoted />
+            <ProfileAdCard />
+            <PeopleYouKnowContainer />
+            <ProfilePalsoV />
+            <ProfileLearning />
+          </Col>
+        </Row>
+        <Row>
+          <Footer />
+        </Row>
+      </Container>
+    </motion.div>
+  )
 }

@@ -72,6 +72,7 @@ importers:
     specifiers:
       '@material-ui/core': ^4.11.3
       '@material-ui/icons': ^4.11.2
+      '@rehooks/local-storage': ^2.4.1
       '@testing-library/jest-dom': ^5.11.4
       '@testing-library/react': ^11.1.0
       '@testing-library/user-event': ^12.1.10
@@ -93,10 +94,12 @@ importers:
       react-router-dom: ^5.2.0
       react-scripts: 4.0.3
       styled-components: ^5.2.3
+      use-http: ^1.0.20
       web-vitals: ^1.0.1
     dependencies:
       '@material-ui/core': 4.11.4_react-dom@17.0.2+react@17.0.2
       '@material-ui/icons': 4.11.2_f543984b3e6c18c2e2e104a9ecbda934
+      '@rehooks/local-storage': 2.4.1_react@17.0.2
       '@testing-library/jest-dom': 5.12.0
       '@testing-library/react': 11.2.6_react-dom@17.0.2+react@17.0.2
       '@testing-library/user-event': 12.8.3
@@ -117,6 +120,7 @@ importers:
       react-router-dom: 5.2.0_react@17.0.2
       react-scripts: 4.0.3_react@17.0.2
       styled-components: 5.3.0_react-dom@17.0.2+react@17.0.2
+      use-http: 1.0.20_react-dom@17.0.2+react@17.0.2
       web-vitals: 1.1.2
     devDependencies:
       file-loader: 6.2.0
@@ -2034,6 +2038,14 @@ packages:
 
   /@popperjs/core/2.9.2:
     resolution: {integrity: sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==}
+    dev: false
+
+  /@rehooks/local-storage/2.4.1_react@17.0.2:
+    resolution: {integrity: sha512-btOCPMDDG5PtNw+qNMTG9HGsgQTUYa3bvZ/ELDSeZ4YA9IGJA97oP6Tcb9EOrN7OqC8zpsiO7qxvpYP01PE+XQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 17.0.2
     dev: false
 
   /@restart/context/2.1.4_react@17.0.2:
@@ -13596,6 +13608,39 @@ packages:
       querystring: 0.2.0
     dev: false
 
+  /urs/0.0.8_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-LaSSPpr91XrVA3vW2zPupw4K6DSQEDKdL4yQZX1mO2fpljIMpB5zctrjRvxLurelWSgKsHsCmfHNCImscryirQ==}
+    peerDependencies:
+      react: ^16.13.1 || ^17.0.0
+      react-dom: ^16.13.1 || ^17.0.0
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /use-http/1.0.20_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-3JOASSO828AsUwGjH3nhjUxHpR0lxIUSSNO/OM+0YydETX6FWJV5zWiGKTOV1Gsxu/3GLRFUbEJ1Cl3mUGkfnw==}
+    peerDependencies:
+      react: ^16.13.1 || ^17.0.0
+      react-dom: ^16.13.1 || ^17.0.0
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      urs: 0.0.8_react-dom@17.0.2+react@17.0.2
+      use-ssr: 1.0.24_react-dom@17.0.2+react@17.0.2
+      utility-types: 3.10.0
+    dev: false
+
+  /use-ssr/1.0.24_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-0MFps7ezL57/3o0yl4CvrHLlp9z20n1rQZV/lSRz7if+TUoM6POU1XdOvEjIgjgKeIhTEye1U0khrIYWCTWw4g==}
+    peerDependencies:
+      react: ^16.13.1 || ^17.0.0
+      react-dom: ^16.13.1 || ^17.0.0
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
   /use/3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
     engines: {node: '>=0.10.0'}
@@ -13646,6 +13691,11 @@ packages:
 
   /utila/0.4.0:
     resolution: {integrity: sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=}
+    dev: false
+
+  /utility-types/3.10.0:
+    resolution: {integrity: sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==}
+    engines: {node: '>= 4'}
     dev: false
 
   /utils-merge/1.0.1:

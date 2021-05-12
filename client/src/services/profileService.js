@@ -21,7 +21,7 @@ export async function getAllProfiles() {
 
 export async function getProfileByUserId(userId) {
   try {
-    const resp = await fetch(`${baseURL}/${userId}`, {
+    const resp = await fetch(`${baseURL}/profiles/${userId}`, {
       method: 'GET',
       headers,
     })

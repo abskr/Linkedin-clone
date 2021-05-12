@@ -48,7 +48,7 @@ const likeHeartPraiseImg = {
   fontSize: '1rem',
   cursor: 'pointer',
   textAlign: 'center',
-  transition: 'background 250ms ease-in-out, transform 150ms ease'
+  transition: 'background 250ms ease-in-out, transform 150ms ease',
 
   //   margin: "0",
   //   padding: "0",
@@ -73,7 +73,6 @@ const dropDownText = {
 }
 
 export default function FeedPostCard({ post, handleDelete }) {
-  console.log(post)
   return (
     <Card bg="white" text="black" className="my-3 card-radius">
       <Card.Body className="px-3 pt-2 pb-0">
@@ -92,9 +91,13 @@ export default function FeedPostCard({ post, handleDelete }) {
               />
             )}
             <Name className="ml-2">
-              {(post.user)
-              ? <h6>{post.user.name} {post.user.lastname}</h6>
-              : <h6>How come you dont have a name?</h6>}
+              {post.user ? (
+                <h6>
+                  {post.user.name} {post.user.lastname}
+                </h6>
+              ) : (
+                <h6>How come you dont have a name?</h6>
+              )}
               <p>522,807 followers</p>
               <p className="timeAndIcons">
                 1h &bull;

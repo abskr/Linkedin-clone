@@ -9,7 +9,6 @@ export async function getAllPosts() {
     })
     if (resp.ok) {
       const data = await resp.json()
-      console.log('THIS IS POST SERVICE', data)
       return data
       // return data.filter((user) => user.area);
     } else {

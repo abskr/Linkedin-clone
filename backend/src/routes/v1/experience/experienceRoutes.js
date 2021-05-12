@@ -28,10 +28,10 @@ router.get(
   '/:expId',
   authGuard,
   asyncHandler(async (req, res, next) => {
-    const id = req.params.id
     const profile = await ProfileModel.findById(id)
-    if (!profile)
-      return next(new NotFoundError('No profile found for this ID!'))
+
+    if (!profile) return next(new NotFoundError('Experience not found'))
+
     res.status(200).send(profile)
   })
 )
