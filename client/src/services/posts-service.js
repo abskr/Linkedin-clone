@@ -1,6 +1,8 @@
 import { headers } from './index.js'
 import { baseURL } from '../config'
 
+const userToken = window.localStorage.getItem('token')
+
 export async function getAllPosts() {
   try {
     const resp = await fetch(`${baseURL}/posts`, {
@@ -23,7 +25,9 @@ export async function addPost(postObj) {
   try {
     const resp = await fetch(`${baseURL}/posts`, {
       method: 'POST',
-      headers,
+      headers: {
+        'Authorization' : `Bearer ${userToken}`
+      },
       body: JSON.stringify(postObj),
     })
     if (resp.ok) {
@@ -35,6 +39,8 @@ export async function addPost(postObj) {
       const data = await resp.json()
     } else {
       console.error('an error occured')
+      console.log(resp)
+      console.log(userToken)
     }
   } catch (error) {
     console.error(error)
