@@ -10,24 +10,7 @@ import { RiSendPlaneFill } from 'react-icons/ri'
 import editButton from "../../../assets/LinkedinSVG's/svgexport-33.svg"
 import deleteButton from "../../../assets/LinkedinSVG's/svgexport-32.svg"
 
-const cardTitle = {
-  fontSize: '20px',
-  fontWeight: '400',
-}
 
-const cardText = {
-  fontSize: '14px',
-  fontWeight: '400',
-}
-
-const cardImage = {
-  maxHeight: '48px',
-}
-
-const postImage = {
-  width: '100%',
-  //   maxHeight: "280px",
-}
 
 const iconStyles = {
   marginRight: '5px',
@@ -55,14 +38,6 @@ const likeHeartPraiseImg = {
   //   verticalAlign: "middle",
 }
 
-const commentsText = {
-  fontSize: '12px',
-  fontWeight: '400',
-  color: 'rgba(128, 128, 128, 1)',
-  //   marginLeft: "3%",
-  marginTop: '8%',
-}
-
 const dropDownHeading = {
   fontSize: '16px',
 }
@@ -77,18 +52,16 @@ export default function FeedPostCard({ post, handleDelete }) {
   return (
     <Card bg="white" text="black" className="my-3 card-radius">
       <Card.Body className="px-3 pt-2 pb-0">
-        <Card.Title
-          className="d-flex justify-content-between align-items-center cardTitle"
-          style={cardTitle}
+        <CardTitle
+          className="d-flex justify-content-between align-items-center"
         >
           <div className="d-flex">
             {post.user ? (
-              <img src={post.user.avatar} alt="avatar" style={cardImage} />
+              <CardImage src={post.user.avatar} alt="avatar"/>
             ) : (
-              <img
+              <CardImage
                 src="https://www.clipartkey.com/mpngs/m/29-297748_round-profile-image-placeholder.png"
                 alt="avatar"
-                style={cardImage}
               />
             )}
             <Name className="ml-2">
@@ -184,11 +157,11 @@ export default function FeedPostCard({ post, handleDelete }) {
           {/* <button>
             <RiMoreLine />
           </button> */}
-        </Card.Title>
-        <Card.Text style={cardText}>{post.text}</Card.Text>
+        </CardTitle>
+        <CardText>{post.text}</CardText>
         {post.image ? (
           <div className="d-flex justify-content-center">
-            <Image fluid style={postImage} src={post.image} />
+            <PostImage fluid src={post.image} />
           </div>
         ) : (
           <div className="d-flex justify-content-center"></div>
@@ -208,7 +181,7 @@ export default function FeedPostCard({ post, handleDelete }) {
               src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f"
             />
           </LHRbutton>
-          <p style={commentsText}> 38 &bull; comments </p>
+          <CommentsText> 38 &bull; comments </CommentsText>
         </div>
       </Card.Body>
 
@@ -320,126 +293,26 @@ const ListItem = styled.li`
   width: 320px;
 `
 
-// const cardTitle = {
-//   fontSize: '20px',
-//   fontWeight: '400',
-// }
+const CardText = styled(Card.Text)`
+  font-size : 14px;
+  font-weight : 400;
+`
+const CardTitle = styled(Card.Title)`
+  font-size : 20px;
+  font-weight: 400;
+`
+const CardImage = styled.img`
+  max-height: 48px;
+`
 
-// const cardText = {
-//   fontSize: '14px',
-//   fontWeight: '400',
-// }
+const PostImage = styled.img`
+  width: 100%
+`
+  //max-height : 280px
 
-// const cardImage = {
-//   maxHeight: '48px',
-// }
-
-// const postImage = {
-//   width: '100%',
-//   //   maxHeight: "280px",
-// }
-
-// const iconStyles = {
-//   marginRight: '5px',
-//   fontSize: '25px',
-// }
-
-// const likeHeartPraiseImg = {
-//   width: '16px',
-//   display: 'inline-block',
-//   border: 'none',
-//   borderRadius: '2%',
-//   padding: '0.1rem',
-//   margin: '0',
-//   textDecoration: 'none',
-//   background: 'none',
-//   color: '#ffffff',
-//   fontFamily: 'sans-serif',
-//   fontSize: '1rem',
-//   cursor: 'pointer',
-//   textAlign: 'center',
-//   transition: 'background 250ms ease-in-out, transform 150ms ease'
-
-//   //   margin: "0",
-//   //   padding: "0",
-//   //   verticalAlign: "middle",
-// }
-
-// const commentsText = {
-//   fontSize: '12px',
-//   fontWeight: '400',
-//   color: 'rgba(128, 128, 128, 1)',
-//   //   marginLeft: "3%",
-//   marginTop: '8%',
-// }
-
-// const dropDownHeading = {
-//   fontSize: '16px',
-// }
-
-// const dropDownText = {
-//   fontSize: '12px',
-//   marginBottom: '2%',
-// }
-
-// const cardTitle = {
-//   fontSize: '20px',
-//   fontWeight: '400',
-// }
-
-// const cardText = {
-//   fontSize: '14px',
-//   fontWeight: '400',
-// }
-
-// const cardImage = {
-//   maxHeight: '48px',
-// }
-
-// const postImage = {
-//   width: '100%',
-//   //   maxHeight: "280px",
-// }
-
-// const iconStyles = {
-//   marginRight: '5px',
-//   fontSize: '25px',
-// }
-
-// const likeHeartPraiseImg = {
-//   width: '16px',
-//   display: 'inline-block',
-//   border: 'none',
-//   borderRadius: '2%',
-//   padding: '0.1rem',
-//   margin: '0',
-//   textDecoration: 'none',
-//   background: 'none',
-//   color: '#ffffff',
-//   fontFamily: 'sans-serif',
-//   fontSize: '1rem',
-//   cursor: 'pointer',
-//   textAlign: 'center',
-//   transition: 'background 250ms ease-in-out, transform 150ms ease'
-
-//   //   margin: "0",
-//   //   padding: "0",
-//   //   verticalAlign: "middle",
-// }
-
-// const commentsText = {
-//   fontSize: '12px',
-//   fontWeight: '400',
-//   color: 'rgba(128, 128, 128, 1)',
-//   //   marginLeft: "3%",
-//   marginTop: '8%',
-// }
-
-// const dropDownHeading = {
-//   fontSize: '16px',
-// }
-
-// const dropDownText = {
-//   fontSize: '12px',
-//   marginBottom: '2%',
-// }
+const CommentsText = styled.p`
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 1);
+  margin-top: 8%
+`

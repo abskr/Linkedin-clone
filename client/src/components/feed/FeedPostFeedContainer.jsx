@@ -21,7 +21,7 @@ export default class FeedPostFeedContainer extends Component {
 
   async componentDidMount() {
     const posts = await getAllPosts()
-    this.setState({ posts: posts })
+    this.setState({ posts: posts })//, postObj: {...this.state.postObj, user : this.props.userData._id} })
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -64,6 +64,7 @@ export default class FeedPostFeedContainer extends Component {
           handleSubmit={this.handleSubmit}
           postObj={this.state.postObj}
           sectionTitle="Write Post"
+          userData={this.props.userData}
         />
         {this.state.posts
           .slice(-20)

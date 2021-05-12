@@ -51,7 +51,7 @@ export default class FeedPage extends Component {
             </Col>
             <Col xs={12} md={6}>
               {/* <HFWritePostContainer /> */}
-              <FeedPostFeedContainer />
+              <FeedPostFeedContainer userData={this.state.user} />
             </Col>
             <Col xs={12} md={3}>
               <FeedRightBar />
