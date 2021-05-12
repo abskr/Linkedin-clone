@@ -25,10 +25,10 @@ function App() {
   if (!localStorage.getItem('token'))
     return (
       <Suspense fallback={<RollerSpinner />}>
-        <SignupPage setUser={setUser} />
+        <LoginPage setUser={setUser} />
       </Suspense>
     )
-  
+
   return (
     <Suspense fallback={<RollerSpinner />}>
       <div className="App">

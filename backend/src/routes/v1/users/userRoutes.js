@@ -51,7 +51,7 @@ router.post(
     user = new UserModel({
       name,
       lastname,
-      email,
+      emailt,
       avatar,
       password,
     })
@@ -63,7 +63,7 @@ router.post(
     // save new user to db
     user = await user.save()
 
-    // save/create new profile from user data
+    // create & save new profile from new user data
     const profile = await ProfileModel({
       user: user._id,
       username: `${user.name}${user.lastname}${nanoid(5)}`,
