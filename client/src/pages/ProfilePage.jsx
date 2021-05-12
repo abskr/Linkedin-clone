@@ -39,13 +39,13 @@ export default class ProfilePage extends Component {
           </Row>
           <Row className="mt-4">
             <Col xs={12} sm={12} md={8}>
-              <ProfileTopCardContainer />
+              {/*<ProfileTopCardContainer />*/}
               <ProfileAboutCard setShowModal={this.props.setShowModal} />
               <PvDashboard />
               <ProfileActivity />
-              <ProfileExperienceContainer
-                setShowModal={this.props.setShowModal}
-              />
+              {/*<ProfileExperienceContainer*/}
+              {/*  setShowModal={this.props.setShowModal}*/}
+              {/*/>*/}
               <Interests />
               <ProfileSkillsCard />
             </Col>

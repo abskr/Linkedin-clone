@@ -1,14 +1,15 @@
 import { headers } from './index.js'
-const _BASE_URL = 'http://localhost:5000/v1/posts'
+import { baseURL } from '../config'
 
 export async function getAllPosts() {
   try {
-    const resp = await fetch(`${_BASE_URL}`, {
+    const resp = await fetch(`${baseURL}/posts`, {
       method: 'GET',
       headers,
     })
     if (resp.ok) {
       const data = await resp.json()
+      console.log('THIS IS POST SERVICE', data)
       return data
       // return data.filter((user) => user.area);
     } else {
@@ -21,7 +22,7 @@ export async function getAllPosts() {
 
 export async function addPost(postObj) {
   try {
-    const resp = await fetch(`${_BASE_URL}`, {
+    const resp = await fetch(`${baseURL}/posts`, {
       method: 'POST',
       headers,
       body: JSON.stringify(postObj),
@@ -35,6 +36,7 @@ export async function addPost(postObj) {
       const data = await resp.json()
     } else {
       console.error('an error occured')
+      console.log(resp)
     }
   } catch (error) {
     console.error(error)
@@ -43,7 +45,7 @@ export async function addPost(postObj) {
 
 export async function deletePostById(id) {
   try {
-    const resp = await fetch(`${_BASE_URL}/${id}`, {
+    const resp = await fetch(`${baseURL}/posts/${id}`, {
       method: 'DELETE',
       headers,
     })

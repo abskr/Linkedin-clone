@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Col, Row } from 'react-bootstrap'
 import EditIcon from '@material-ui/icons/Edit'
 import styled from 'styled-components'
-const format = require('date-fns/format')
+import format from 'date-fns/format'
 
 function ProfileExperienceListItem(props) {
   const startDate = format(new Date(props.startDate), 'MMM yyyy')
