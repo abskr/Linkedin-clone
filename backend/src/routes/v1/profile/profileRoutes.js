@@ -5,14 +5,14 @@ import { authGuard } from '../../../guard/authGuard.js'
 import ProfileModel from '../../../database/mongoDB/models/ProfileModel.js'
 import { checkSchema } from 'express-validator'
 import multer from 'multer'
-import { v2 as cloudinary } from "cloudinary"
-import { CloudinaryStorage } from "multer-storage-cloudinary"
-import { generatePdf } from "../../../services/pdf/index.js"
+import { v2 as cloudinary } from 'cloudinary'
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import { generatePdf } from '../../../services/pdf/index.js'
 const router = express.Router()
 const cloudStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "strive",
+    folder: 'strive',
   },
 })
 const cloudMulter = multer({ storage: cloudStorage })
@@ -23,7 +23,6 @@ const cloudMulter = multer({ storage: cloudStorage })
 router.get(
   '/',
   asyncHandler(async (req, res, next) => {
-    console.log('profiles hit')
     const profiles = await ProfileModel.find()
     if (!profiles) return next(new NotFoundError('No profiles found!'))
 
@@ -110,14 +109,13 @@ router.delete(
   })
 )
 
-router.get("/:id/exportPDF", async (req, res, next) => {
+router.get('/:id/exportPDF', async (req, res, next) => {
   try {
     await generatePdf({})
-    res.send("PDF Generated")
+    res.send('PDF Generated')
   } catch (error) {
     next(error)
   }
 })
-
 
 export default router

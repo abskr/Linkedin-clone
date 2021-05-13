@@ -21,8 +21,11 @@ import ProfileLearning from 'components/profile/ProfileLearning.js'
 
 import ProfileSkillsCard from 'components/profile/ProfileSkillsCard.jsx'
 import ProfileExperienceContainer from 'components/profile/experience-card/ProfileExperienceContainer.jsx'
+import { useAuth } from '../contexts/AuthContext.js'
 
-export default function ProfilePage({ user, ...props }) {
+export default function ProfilePage({ ...props }) {
+  const { user } = useAuth()
+  console.log(user._id)
   return (
     <motion.div
       initial={{ scaleY: 0.99, opacity: 0 }}

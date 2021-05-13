@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import useToken from '../hooks/useToken.js'
 import styled from 'styled-components'
-import { Row, Col, Container } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 
 export default function Signup({ setUser, ...props }) {
-  const { saveToken } = useToken()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
@@ -29,50 +25,9 @@ export default function Signup({ setUser, ...props }) {
     })
     if (resp) {
       setUser(resp.user)
-      saveToken(resp.token)
     }
   }
-  const Background = styled.div`
-    background-color: #f3f2ef;
-    align-items: center;
-  `
-  const FormContainer = styled.div`
-    border-radius: 8px;
-    background-color: #fff;
-    width: 400px;
-    margin: 0 auto;
-    padding-top: 24px;
-    padding: 0 24px 0 24px;
-  `
-  const ButtonLi = styled.button`
-    background-color: #0a66c2;
-    height: 48px;
-    border-radius: 38px;
-    border: 0;
-  
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 1.6rem;
-    font-weight: 600;
-    font-family: inherit;
-    height: 40px;
-    line-height: 40px;
-    overflow: hidden;
-    outline-width: 2px;
-    padding: 0 24px;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    vertical-align: middle;
-    z-index: 0;
-    font-weight: 500;
-    padding: 0 16px 0 16px;
-    width: 100%;
-  `
+
   return (
     <Background>
       <Row>
@@ -123,11 +78,53 @@ export default function Signup({ setUser, ...props }) {
           <div>
             <ButtonLi type="submit">Agree & Join</ButtonLi>
           </div>
-          <span style={{    position: 'absolute',
-    left: '0',
-    width: '100%'}}></span>
+          <span
+            style={{ position: 'absolute', left: '0', width: '100%' }}
+          ></span>
         </form>
       </FormContainer>
     </Background>
   )
 }
+
+const Background = styled.div`
+  background-color: #f3f2ef;
+  align-items: center;
+`
+const FormContainer = styled.div`
+  border-radius: 8px;
+  background-color: #fff;
+  width: 400px;
+  margin: 0 auto;
+  padding-top: 24px;
+  padding: 0 24px 0 24px;
+`
+const ButtonLi = styled.button`
+  background-color: #0a66c2;
+  height: 48px;
+  border-radius: 38px;
+  border: 0;
+
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: inherit;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  outline-width: 2px;
+  padding: 0 24px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  vertical-align: middle;
+  z-index: 0;
+  font-weight: 500;
+  padding: 0 16px 0 16px;
+  width: 100%;
+`

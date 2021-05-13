@@ -12,8 +12,7 @@ import { RiMessage2Fill } from 'react-icons/ri'
 import { GoBell } from 'react-icons/go'
 import { CgMenuGridO } from 'react-icons/cg'
 import { RiSlideshow3Fill } from 'react-icons/ri'
-import { useHistory } from 'react-router-dom'
-import useToken from '../../../hooks/useToken.js'
+import { useAuth } from '../../../contexts/AuthContext.js'
 
 const navbarStyle = {
   backgroundColor: 'white',
@@ -34,12 +33,8 @@ const rightNav = {
   borderLeft: '1px solid #e8e8e8',
 }
 export default function TopNavbar({ links, title, image, ...props }) {
-  const { removeToken } = useToken()
-  const history = useHistory()
-  const logout = () => {
-    removeToken()
-    history.push('/login')
-  }
+  const { logout } = useAuth()
+
   return (
     <div>
       <Navbar style={navbarStyle}>

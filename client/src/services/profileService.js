@@ -1,5 +1,5 @@
 import { headers } from './index.js'
-import { baseURL } from '../config'
+import { baseURL } from '../config.js'
 
 export async function getAllProfiles() {
   try {
