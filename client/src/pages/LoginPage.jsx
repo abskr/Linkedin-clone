@@ -16,18 +16,18 @@ export default function Login() {
 
   return (
     <div>
-      <img
-        style={{ position: 'fixed', left: '250px', top: '265px' }}
-        className="m-1 ml-4"
-        height={25}
-        src={linkedInLgLogo}
-        alt="logo"
-      />
       <div
         className="d-flex flex-column align-items-center justify-content-center"
         style={{ height: '100vh', width: '100vw', background: 'white' }}
       >
         <Row className="shadow p-3" rounded md={{ span: 6, offset: 3 }}>
+          <img
+            // style={{ position: 'fixed', left: '250px', top: '265px' }}
+            className="m-4"
+            height={25}
+            src={linkedInLgLogo}
+            alt="logo"
+          />
           <Col xs={12}>
             <div className="login-wrapper">
               <h3 className="mb-2">Sign in</h3>
@@ -44,7 +44,7 @@ export default function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </label>
-                    <label className="d-block mb-3" style={{ width: '100%' }}>
+                    <label className="d-block mb-4" style={{ width: '100%' }}>
                       <Form.Control
                         type="password"
                         placeholder="Password"
@@ -57,7 +57,7 @@ export default function Login() {
                         size="lg"
                         block
                         type="submit"
-                        className="rounded-pill"
+                        className="rounded-pill mb-3"
                       >
                         Log in
                       </Button>
