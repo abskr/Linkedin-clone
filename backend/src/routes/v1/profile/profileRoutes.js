@@ -67,9 +67,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const profile = await ProfileModel.findOne({
       username: req.params.username,
-    })
-      .populate('user', ['name', 'avatar', 'username'])
-      .find()
+    }).populate('users', ['name', 'avatar'])
 
     if (!profile)
       return next(new NotFoundError('No profile found for this user'))
