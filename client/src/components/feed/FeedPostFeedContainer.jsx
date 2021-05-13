@@ -71,7 +71,7 @@ export default class FeedPostFeedContainer extends Component {
     return (
       <Suspense fallback={<RollerSpinner />}>
         <Modal
-          title="Experience"
+          title="Create a post"
           handleModal={this.handleModal}
           showModal={this.state.showModal}
         >

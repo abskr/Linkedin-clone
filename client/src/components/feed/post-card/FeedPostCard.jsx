@@ -90,7 +90,7 @@ export default function FeedPostCard({ post, handleDelete }) {
               title={<RiMoreLine />}
               menuAlign="right"
             >
-              <ul className="mb-0">
+              <UnordneredList className="mb-0">
                 <ListItem>
                   <Dropdown.Item href="#/action-1">
                     <h6 style={dropDownHeading}>Save</h6>
@@ -150,7 +150,7 @@ export default function FeedPostCard({ post, handleDelete }) {
                     </p>
                   </Dropdown.Item>
                 </ListItem>
-              </ul>
+              </UnordneredList>
             </DropdownButton>
           </div>
 
@@ -210,10 +210,13 @@ const CardContainer = styled(Card)`
   border-radius: 10px
 `
 
-const EButton = styled.image`
-  height: 50px;
-  width: auto;
+const UnordneredList = styled.ul`
+  list-style-type: none;
 `
+// const EButton = styled.image`
+//   height: 50px;
+//   width: auto;
+// `
 
 const SButton = styled.button`
   border: none !important;
