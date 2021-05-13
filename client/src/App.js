@@ -4,6 +4,7 @@ import { Route, Switch, useLocation, Redirect } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext.js'
 import { AnimatePresence } from 'framer-motion'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useFetch } from 'use-http'
 
 const LoginPage = React.lazy(() => import('./pages/LoginPage.jsx'))
 const Topnav = React.lazy(() => import('./components/shared/navbar/TopNavbar'))
@@ -60,7 +61,7 @@ function App() {
             />
             <Route
               exact
-              path="/profile"
+              path="/profile/:username"
               render={(routerProps) => (
                 <ProfilePage {...routerProps} user={user} />
               )}

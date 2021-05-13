@@ -4,7 +4,7 @@ import { AuthProvider } from './AuthContext.js'
 import { baseURL } from '../config.js'
 
 function AppProviders({ children }) {
-  const token = localStorage.getItem('token')
+  const token = JSON.parse(localStorage.getItem('token'))
   const options = {
     headers: {
       'Content-Type': 'application/json',

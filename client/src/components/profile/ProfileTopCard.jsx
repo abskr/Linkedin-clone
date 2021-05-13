@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import styled from 'styled-components'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera'
 import EditIcon from '@material-ui/icons/Edit'
+import { useAuth } from '../../contexts/AuthContext.js'
+import { baseURL } from '../../config.js'
+import { useFetch } from 'use-http'
+import { useProfiles } from '../../hooks/useProfiles.js'
+import RollerSpinner from '../shared/spinners/RollerSpinner.jsx'
 
 export const ProfileTopCard = (props) => {
+  const { token } = useAuth()
+  const { myProfile, profile } = useProfiles()
+
+  console.log(myProfile)
+
   return (
     <Container>
       <BackgroundImage
@@ -13,7 +23,10 @@ export const ProfileTopCard = (props) => {
         alt="backgroundImage"
       />
       <PersonDetails>
-        <Name>Aymane Abssi</Name>
+        <Name>
+          {profile?.user?.name}
+          {profile?.user?.lastname}
+        </Name>
         <Job>Strive schoole Student</Job>
         <PlaceAndContact>
           <Place>Planet 2,Galaxy 3,universe 30</Place>
@@ -42,10 +55,7 @@ export const ProfileTopCard = (props) => {
         All LinkediN members
       </LinkedInMembers>
       <ProfilePic>
-        <img
-          src="http://careerconfidential.com/wp-content/uploads/2017/05/Businessman-Copy-Copy.jpg"
-          alt="ProfileImage"
-        />
+        <img src={profile?.user?.avatar} alt="ProfileImage" />
       </ProfilePic>
       <CamIcon>
         <PhotoCameraIcon color="primary" />

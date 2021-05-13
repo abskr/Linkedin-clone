@@ -1,8 +1,10 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import { asyncHandler } from '../../../core/asyncHandler.js'
 import { NotFoundError } from '../../../core/apiErrors.js'
 import { authGuard } from '../../../guard/authGuard.js'
 import ProfileModel from '../../../database/mongoDB/models/ProfileModel.js'
+import UserModel from '../../../database/mongoDB/models/UserModel.js'
 import { checkSchema } from 'express-validator'
 import multer from 'multer'
 import { v2 as cloudinary } from 'cloudinary'
@@ -30,17 +32,24 @@ router.get(
   })
 )
 
-// @route  POST v1/profiles/id/:id
+// @route  POST v1/profiles/me
 // @desc   Get profile by ID
 // @access Private
 router.get(
   '/me',
   authGuard,
   asyncHandler(async (req, res, next) => {
-    const id = req.params.id
-    const profile = await ProfileModel.findById(id)
+    const id = req.user.id
+    const profile = await ProfileModel.findOne({
+      user: mongoose.Types.ObjectId(id),
+    }).populate({
+      path: 'user',
+      model: UserModel,
+    })
+
     if (!profile)
       return next(new NotFoundError('No profile found for this ID!'))
+
     res.status(200).send(profile)
   })
 )
@@ -65,9 +74,13 @@ router.post(
 router.get(
   '/:username',
   asyncHandler(async (req, res, next) => {
+    console.log('username route', req.params)
     const profile = await ProfileModel.findOne({
       username: req.params.username,
-    }).populate('users', ['name', 'avatar'])
+    }).populate({
+      path: 'user',
+      model: UserModel,
+    })
 
     if (!profile)
       return next(new NotFoundError('No profile found for this user'))

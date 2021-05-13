@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 
 // containers
 import PeopleYouKnowContainer from 'components/profile/PeopleYouKnowContainer.jsx'
-import ProfileTopCardContainer from 'components/profile/ProfileTopCardContainer.jsx'
 
 // components
 import AdsBar from 'components/shared/adsbar/AdsBar'
@@ -24,13 +24,14 @@ import ProfileExperienceContainer from 'components/profile/experience-card/Profi
 import { useAuth } from '../contexts/AuthContext.js'
 import { useExperiences } from '../hooks/useExperiences.js'
 import { useProfiles } from '../hooks/useProfiles.js'
+import useFetch from 'use-http'
+import axios from 'axios'
+import { baseURL } from '../config.js'
+import ProfileTopCard from '../components/profile/ProfileTopCard.jsx'
 
 export default function ProfilePage({ ...props }) {
-  const { user } = useAuth()
-  const { allExperience, users, error } = useExperiences()
-  const { profiles, profile } = useProfiles('juniorDEVed')
-
-  console.log(profile)
+  // const { profile, getProfile } = useProfiles()
+  // const { username } = useParams()
 
   return (
     <motion.div
@@ -44,11 +45,10 @@ export default function ProfilePage({ ...props }) {
           <Col>
             <AdsBar />
           </Col>
-          {profile.area}
         </Row>
         <Row className="mt-4">
           <Col xs={12} sm={12} md={8}>
-            <ProfileTopCardContainer user={user} />
+            <ProfileTopCard />
             <ProfileAboutCard setShowModal={props.setShowModal} />
             <PvDashboard />
             <ProfileActivity />
