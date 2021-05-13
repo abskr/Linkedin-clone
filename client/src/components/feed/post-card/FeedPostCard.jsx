@@ -50,8 +50,8 @@ const dropDownText = {
 export default function FeedPostCard({ post, handleDelete }) {
   console.log(post)
   return (
-    <Card bg="white" text="black" className="my-3 card-radius">
-      <Card.Body className="px-3 pt-2 pb-0">
+    <CardContainer bg="white" text="black" className="my-3 card-radius">
+      <Card.Body className="px-3 pt-3 pb-0">
         <CardTitle
           className="d-flex justify-content-between align-items-center"
         >
@@ -67,7 +67,7 @@ export default function FeedPostCard({ post, handleDelete }) {
             <Name className="ml-2">
               {(post.user)
               ? <h6>{post.user.name} {post.user.lastname}</h6>
-              : <h6>How come you dont have a name?</h6>}
+              : <h6>I'M UNDEFINED</h6>}
               <p>522,807 followers</p>
               <p className="timeAndIcons">
                 1h &bull;
@@ -159,12 +159,10 @@ export default function FeedPostCard({ post, handleDelete }) {
           </button> */}
         </CardTitle>
         <CardText>{post.text}</CardText>
-        {post.image ? (
+        {post.image && (
           <div className="d-flex justify-content-center">
             <PostImage fluid src={post.image} />
           </div>
-        ) : (
-          <div className="d-flex justify-content-center"></div>
         )}
         <div className="d-inline-flex align-items-baseline">
           <LHRbutton>
@@ -203,9 +201,14 @@ export default function FeedPostCard({ post, handleDelete }) {
           Send
         </SButton>
       </div>
-    </Card>
+    </CardContainer>
   )
 }
+
+
+const CardContainer = styled(Card)`
+  border-radius: 10px
+`
 
 const EButton = styled.image`
   height: 50px;

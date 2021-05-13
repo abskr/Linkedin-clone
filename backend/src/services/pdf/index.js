@@ -1,7 +1,6 @@
 import fs from "fs-extra"
 import { fileURLToPath } from "url"
 import { dirname, join } from "path"
-import { join } from "path"
 import PdfPrinter from "pdfmake"
 import { pipeline } from "stream"
 import { promisify } from "util"

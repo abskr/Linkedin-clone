@@ -1,10 +1,10 @@
 import { v2 as cloudinary } from 'cloudinary'
-import {cloudinaryConfig} from '../../config.js'
+import {cloudConfig} from '../../config.js'
 
 cloudinary.config({
-  cloud_name: cloudinaryConfig.cloudName,
-  api_key: cloudinaryConfig.apiKey,
-  api_secret: cloudinaryConfig.apiSecret,
+  cloud_name: cloudConfig.cloudName,
+  api_key: cloudConfig.apiKey,
+  api_secret: cloudConfig.apiSecret,
 })
 
 export default cloudinary

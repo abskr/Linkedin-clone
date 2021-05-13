@@ -9,7 +9,7 @@ function AdsBar() {
           - Companies Need Your Expertise - Click Here To Connect With Them
         </span>
       </a>
-      <span className="text-muted"> Ad ...</span>
+      <span className="text-muted"> ad</span>
     </div>
   )
 }

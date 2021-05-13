@@ -6,8 +6,7 @@ const FeedLeftBar = () => {
   const recentItem = (Item) => <RecentItem>#{Item}</RecentItem>
   const recentEvent = (event) => (
     <RecentItem>
-      <EventIcon />
-      {event}
+      <EvIcon /> {event}
     </RecentItem>
   )
   return (
@@ -25,17 +24,17 @@ const FeedLeftBar = () => {
             roundedCircle
             className="Avatar"
           />
-          <Name>Jhone Doe</Name>
-          <Discreption>exapmle@gmail.com</Discreption>
+          <Name>Welcome, Jhone Doe!</Name>
+          <ContactDescription>exapmle@gmail.com</ContactDescription>
         </SideBarTop>
         <SideBarBottom>
           <SideBarStat>
             <Stat>
-              <WhoViewedYou>Who viewed you</WhoViewedYou>
+              <ProfileViews>Who viewed you</ProfileViews>
               <StatNum>2,780</StatNum>
             </Stat>
             <Stat>
-              <WhoViewedYou>Views on posts</WhoViewedYou>
+              <ProfileViews>Views on posts</ProfileViews>
               <StatNum>2,780</StatNum>
             </Stat>
           </SideBarStat>
@@ -66,7 +65,6 @@ const Container = styled.div`
   border-radius: 10px;
   text-align: center;
   height: fit-content;
-  margin-top: 15px;
 `
 const FirstSection = styled.div``
 const SideBarTop = styled.div`
@@ -94,7 +92,7 @@ const SideBarBottom = styled.div``
 const Name = styled.h1`
   font-size: 16px;
 `
-const Discreption = styled.div`
+const ContactDescription = styled.div`
   font-size: 12px;
 `
 const StatNum = styled.div`
@@ -111,7 +109,7 @@ const SideBarStat = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 `
-const WhoViewedYou = styled.div`
+const ProfileViews = styled.div`
   color: gray;
   font-size: 13px;
   font-weight: 600;
@@ -149,4 +147,9 @@ const ThirdSection = styled.div`
   border: 1px solid lightgray;
   border-radius: 10px;
   margin-top: 10px;
+`
+
+const EvIcon = styled(EventIcon)`
+  height: 17px;
+  margin-right: 5px
 `
