@@ -17,8 +17,6 @@ export default function ProfileTopCardContainer({ user }) {
     setProfile(userProfile)
   }
 
-  console.log(profiles)
-
   return (
     <div style={{ position: 'relative' }}>
       <Suspense fallback={<RollerSpinner />}>

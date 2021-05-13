@@ -8,7 +8,6 @@ export async function getAllProfiles() {
       headers,
     })
     if (resp.ok) {
-      console.log('PROFILE SERVICE: ')
       const data = await resp.json()
       return data.filter((user) => user.area)
     } else {

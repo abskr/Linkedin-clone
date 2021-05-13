@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 
@@ -22,10 +22,16 @@ import ProfileLearning from 'components/profile/ProfileLearning.js'
 import ProfileSkillsCard from 'components/profile/ProfileSkillsCard.jsx'
 import ProfileExperienceContainer from 'components/profile/experience-card/ProfileExperienceContainer.jsx'
 import { useAuth } from '../contexts/AuthContext.js'
+import { useExperiences } from '../hooks/useExperiences.js'
+import { useProfiles } from '../hooks/useProfiles.js'
 
 export default function ProfilePage({ ...props }) {
   const { user } = useAuth()
-  console.log(user._id)
+  const { allExperience, users, error } = useExperiences()
+  const { profiles, profile } = useProfiles('juniorDEVed')
+
+  console.log(profile)
+
   return (
     <motion.div
       initial={{ scaleY: 0.99, opacity: 0 }}
@@ -38,6 +44,7 @@ export default function ProfilePage({ ...props }) {
           <Col>
             <AdsBar />
           </Col>
+          {profile.area}
         </Row>
         <Row className="mt-4">
           <Col xs={12} sm={12} md={8}>
