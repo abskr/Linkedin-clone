@@ -35,8 +35,6 @@ export default class FeedPage extends Component {
   }
 
   render() {
-    console.log(this.state)
-    console.log(this.userId)
     return (
       <motion.div
         initial={{ scaleY: 0.99, opacity: 0 }}

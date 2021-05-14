@@ -1,5 +1,5 @@
 import { headers } from './index.js'
-import { baseURL } from '../config'
+import { baseURL } from '../config.js'
 
 export async function getAllProfiles() {
   try {
@@ -8,7 +8,6 @@ export async function getAllProfiles() {
       headers,
     })
     if (resp.ok) {
-      console.log('PROFILE SERVICE: ')
       const data = await resp.json()
       return data.filter((user) => user.area)
     } else {
@@ -21,7 +20,7 @@ export async function getAllProfiles() {
 
 export async function getProfileByUserId(userId) {
   try {
-    const resp = await fetch(`${baseURL}/${userId}`, {
+    const resp = await fetch(`${baseURL}/profiles/${userId}`, {
       method: 'GET',
       headers,
     })

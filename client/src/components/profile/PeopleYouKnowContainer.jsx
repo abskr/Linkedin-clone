@@ -11,7 +11,6 @@ export default class PeopleYouKnowContainer extends Component {
 
   async componentDidMount() {
     const profiles = await getAllProfiles()
-    console.log(profiles)
     this.setState({ ...this.state.profiles, profiles: profiles })
   }
 

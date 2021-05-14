@@ -1,5 +1,5 @@
 import { headers } from './index.js'
-import { baseURL } from '../config'
+import { baseURL } from '../config.js'
 
 export async function getAllPosts() {
   try {
@@ -9,7 +9,6 @@ export async function getAllPosts() {
     })
     if (resp.ok) {
       const data = await resp.json()
-      console.log('THIS IS POST SERVICE', data)
       return data
       // return data.filter((user) => user.area);
     } else {
