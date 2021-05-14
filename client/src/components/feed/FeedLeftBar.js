@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Image } from 'react-bootstrap'
 import EventIcon from '@material-ui/icons/Event'
+import { useAuth } from '../../contexts/AuthContext.js'
+
 const FeedLeftBar = () => {
+  const { user } = useAuth()
+  console.log(user)
   const recentItem = (Item) => <RecentItem>#{Item}</RecentItem>
   const recentEvent = (event) => (
     <RecentItem>
@@ -19,13 +23,17 @@ const FeedLeftBar = () => {
               alt="backgroundImage"
             />
           </BackgroundImage>
-          <Image
-            src="http://careerconfidential.com/wp-content/uploads/2017/05/Businessman-Copy-Copy.jpg"
+          {(user.avatar) ? <Image
+            src={user.avatar}
             roundedCircle
             className="Avatar"
-          />
-          <Name>Welcome, Jhone Doe!</Name>
-          <ContactDescription>exapmle@gmail.com</ContactDescription>
+          /> : <Image
+            src = "http://www.gravatar.com/avatar/913ebd9f754b96b50b14707f4687b8dd?s=200&r=pg&d=mm"
+            roundedCircle
+            className="Avatar"
+          />}
+          <Name>Welcome, {user.name} {user.lastname}!</Name>
+          <ContactDescription>{user.email}</ContactDescription>
         </SideBarTop>
         <SideBarBottom>
           <SideBarStat>

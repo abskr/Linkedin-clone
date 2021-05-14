@@ -20,6 +20,7 @@ export default class FeedPostFeedContainer extends Component {
       //   _id: "5d93ac84b86e220017e76ae1", //server generated
       text: '',
     },
+    selectedFile: null,
     showModal: false,
   }
 
@@ -44,7 +45,7 @@ export default class FeedPostFeedContainer extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
-    await addPost(this.state.postObj)
+    await addPost(this.state.selectedFile, this.state.postObj.text)
     const posts = await getAllPosts()
     this.setState({ posts: posts })
   }
@@ -67,6 +68,15 @@ export default class FeedPostFeedContainer extends Component {
     })
   }
 
+  handleFile = (evt) => {
+    const fileData = evt.target.files[0]
+    console.log(fileData)
+    this.setState({
+      ...this.state,
+      selectedFile: fileData
+    })
+  }
+
   render() {
     return (
       <Suspense fallback={<RollerSpinner />}>
@@ -78,7 +88,9 @@ export default class FeedPostFeedContainer extends Component {
           <HfWritePostForm
             handleSubmit={this.handleSubmit}
             handleInput={this.handleInput}
+            handleFile={this.handleFile}
             postObj={this.state.postObj}
+            handleModal={this.handleModal}
           />
         </Modal>
         <Card className="mb-3" style={{ borderRadius: '10px' }}>
@@ -87,7 +99,7 @@ export default class FeedPostFeedContainer extends Component {
               <img
                 style={{ borderRadius: '50%' }}
                 width="48"
-                src="http://careerconfidential.com/wp-content/uploads/2017/05/Businessman-Copy-Copy.jpg"
+                src="http://www.gravatar.com/avatar/913ebd9f754b96b50b14707f4687b8dd?s=200&r=pg&d=mm"
                 loading="lazy"
                 height="48"
                 alt="yourPic"
@@ -97,7 +109,7 @@ export default class FeedPostFeedContainer extends Component {
               />
             </div>
             <Button
-              style={{ height: '2.4rem', width: '100%'}}
+              style={{ height: '2.4rem', width: '100%' }}
               variant="light"
               className="rounded-pill text-left text-muted mx-2"
               onClick={this.handleModal}

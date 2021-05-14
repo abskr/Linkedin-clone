@@ -5,7 +5,9 @@ import { Container, Form, Button } from "react-bootstrap";
 export default function HfWritePostForm({
   handleSubmit,
   handleInput,
+  handleFile,
   postObj,
+  handleModal
 }) {
   return (
     <Container fluid>
@@ -19,10 +21,11 @@ export default function HfWritePostForm({
             placeholder="Leave a Comment"
           />
         </Form.Group>
-        <Button className="mt-4" variant="primary" type="submit">
+        <Form.File id="custom-file" label="Upload an image" custom onChange={handleFile}/>
+        <Button className="mt-4" variant="primary" type="submit" onClick={handleModal}>
           Submit
         </Button>
       </Form>
     </Container>
-  );
+  )
 }
