@@ -30,11 +30,18 @@ function AuthProvider(props) {
       email,
       password,
     })
+
+    console.log('config', baseURL)
+    console.log(newUser)
     if (newUser) {
       setUser(newUser)
+      // response.send(newUser)
+      console.log('new user created')
       history.push('/')
+      
     }
   }
+
 
   const logout = () => {
     setToken(null)
