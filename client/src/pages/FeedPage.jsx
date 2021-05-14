@@ -6,6 +6,7 @@ import RollerSpinner from '../components/shared/spinners/RollerSpinner'
 
 import { getProfileByUserId } from '../services/profileService.js'
 
+
 // components
 import AdsBar from 'components/shared/adsbar/AdsBar'
 import FeedLeftBar from 'components/feed/FeedLeftBar.js'
@@ -22,14 +23,11 @@ export default class FeedPage extends Component {
   state = {
     loading: true,
     posts: [],
-    user: {},
+    user:{}
   }
 
-  userId = window.localStorage.getItem('token')
   
   componentDidMount = async () => {
-    const userData = await getProfileByUserId(this.userId)
-    this.setState({ ...this.state, user: userData })
     const { data } = await axios.get('http://localhost:5000/v1/posts')
     this.setState({ ...this.state, posts: data })
   }

@@ -19,12 +19,18 @@ export async function getAllPosts() {
   }
 }
 
-export async function addPost(postObj) {
+export async function addPost(file, text) {
+  const fd = new FormData()
+  fd.append("post", file)
+  fd.append("text", text)
+  const token = window.localStorage.getItem('token').split('"')[1]
+  
+  console.log(token)
   try {
     const resp = await fetch(`${baseURL}/posts`, {
       method: 'POST',
-      headers,
-      body: JSON.stringify(postObj),
+      headers: { Authorization: `Bearer ${token}`},
+      body: fd
     })
     if (resp.ok) {
       //   this.setState({
@@ -33,9 +39,11 @@ export async function addPost(postObj) {
       //     },
       //   });
       const data = await resp.json()
+      return data
     } else {
       console.error('an error occured')
-      console.log(resp)
+      // console.log(postObj)
+      // console.log(resp)
     }
   } catch (error) {
     console.error(error)

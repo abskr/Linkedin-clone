@@ -11,7 +11,6 @@ import cloudinary from "../../../services/image/cloudinaryUpload.js"
 import {CloudinaryStorage} from "multer-storage-cloudinary"
 import multer from "multer"
 import q2m from 'query-to-mongo'
-
 const router = express.Router()
 
 const cloudStorage = new CloudinaryStorage({
@@ -42,13 +41,16 @@ router.get(
 // @access Private
 router.post(
   '/',
-  [authGuard, checkSchema(postValidator)],
+  [authGuard,cloudMulter.single("post"), checkSchema(postValidator)],
   asyncHandler(async (req, res, next) => {
     validationHandler(req)
+    //console.log(req.body.text, req.file)
     req.body.user = req.user.id
-    const newPost = new PostModel(req.body)
+    // req.body.image = req.file.path
+      const newPost = new PostModel({text:req.body.text, image:req.file.path, user: req.body.user})
     const { _id } = await newPost.save()
     res.status(200).send(`${_id} is saved`)
+   
   })
 )
 
