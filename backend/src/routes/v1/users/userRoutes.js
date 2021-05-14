@@ -42,15 +42,8 @@ router.post(
     console.log(req.body)
 
     let user = await UserModel.findOne({ email })
-    console.log('User is ' + user)
 
-    console.log(Boolean(user))
-
-    if (user) {
-      // null is truthy???
-      console.log('here')
-      return next(new BadRequestError('User already exists'))
-    }
+    if (user) return next(new BadRequestError('User already exists'))
 
     const avatar = gravatar.url(email, {
       s: '200',
@@ -71,11 +64,9 @@ router.post(
     user.password = await bcrypt.hash(password, salt)
 
     // save new user to db
-    console.log(user)
-    await user.save()
+    user = await user.save()
 
     const username = `${user.name}${user.lastname}${nanoid(10)}`
-    console.log({ username })
     // create & save new profile from new user data
     const profile = await new ProfileModel({
       user: user._id,

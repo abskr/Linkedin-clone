@@ -33,9 +33,9 @@ function AuthProvider(props) {
     })
     console.log(resp)
     if (resp) {
-      setUser(resp)
-      console.log('inside if', resp)
-      history.push('/')
+      setUser(resp.user)
+      setToken(resp.token)
+      history.push('/feed')
     }
   }
 
