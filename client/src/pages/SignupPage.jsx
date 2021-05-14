@@ -1,31 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Col, Row } from 'react-bootstrap'
+import { useAuth } from '../contexts/AuthContext.js'
 
 export default function Signup({ setUser, ...props }) {
+  const { registerUser } = useAuth()
+  const [name, setName] = useState()
+  const [lastname, setLastname] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
-  const loginUser = async (credentials) => {
-    const resp = await fetch('http://localhost:5000/v1/auth', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    })
-    return await resp.json()
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const resp = await loginUser({
-      email,
-      password,
-    })
-    if (resp) {
-      setUser(resp.user)
-    }
+    await registerUser(name, lastname, email, password)
   }
 
   return (

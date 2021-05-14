@@ -4,18 +4,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera'
 import EditIcon from '@material-ui/icons/Edit'
-import { useAuth } from '../../contexts/AuthContext.js'
-import { baseURL } from '../../config.js'
-import { useFetch } from 'use-http'
-import { useProfiles } from '../../hooks/useProfiles.js'
-import RollerSpinner from '../shared/spinners/RollerSpinner.jsx'
 
-export const ProfileTopCard = (props) => {
-  const { token } = useAuth()
-  const { myProfile, profile } = useProfiles()
-
-  console.log(myProfile)
-
+export const ProfileTopCard = ({ profile }) => {
   return (
     <Container>
       <BackgroundImage

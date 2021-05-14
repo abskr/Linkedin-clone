@@ -1,6 +1,5 @@
-import React, { Suspense, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Container, Row, Col } from 'react-bootstrap'
+import React, { Suspense } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import { motion } from 'framer-motion'
 
 // containers
@@ -12,26 +11,20 @@ import ProfileContent from 'components/profile/ProfileContent.jsx'
 import ProfileAdCard from 'components/profile/ProfileAdCard.jsx'
 import ProfileAboutCard from 'components/profile/ProfileAboutCard.jsx'
 import PvDashboard from 'components/profile/dashboard/PvDashboard'
-import ProfilePalsoV from 'components/profile/ProfilePalsoV.js'
+import ProfileAlsoViewed from 'components/profile/ProfileAlsoViewed.js'
 import ProfileActivity from 'components/profile/ProfileActivity.js'
 import Interests from 'components/interests/Interests'
 import Footer from 'components/shared/Footer.js'
 import ProfilePromoted from 'components/profile/ProfilePromoted.js'
 import ProfileLearning from 'components/profile/ProfileLearning.js'
-
 import ProfileSkillsCard from 'components/profile/ProfileSkillsCard.jsx'
-import ProfileExperienceContainer from 'components/profile/experience-card/ProfileExperienceContainer.jsx'
-import { useAuth } from '../contexts/AuthContext.js'
-import { useExperiences } from '../hooks/useExperiences.js'
-import { useProfiles } from '../hooks/useProfiles.js'
-import useFetch from 'use-http'
-import axios from 'axios'
-import { baseURL } from '../config.js'
 import ProfileTopCard from '../components/profile/ProfileTopCard.jsx'
+import { useProfile } from '../hooks/useProfile.js'
+import RollerSpinner from '../components/shared/spinners/RollerSpinner.jsx'
+import ProfileExperienceContainer from '../components/profile/experience-card/ProfileExperienceContainer.jsx'
 
 export default function ProfilePage({ ...props }) {
-  // const { profile, getProfile } = useProfiles()
-  // const { username } = useParams()
+  const { profile } = useProfile()
 
   return (
     <motion.div
@@ -48,13 +41,13 @@ export default function ProfilePage({ ...props }) {
         </Row>
         <Row className="mt-4">
           <Col xs={12} sm={12} md={8}>
-            <ProfileTopCard />
+            <Suspense fallback={<RollerSpinner />}>
+              <ProfileTopCard profile={profile} />
+            </Suspense>
             <ProfileAboutCard setShowModal={props.setShowModal} />
             <PvDashboard />
             <ProfileActivity />
-            {/*<ProfileExperienceContainer*/}
-            {/*  setShowModal={this.props.setShowModal}*/}
-            {/*/>*/}
+            <ProfileExperienceContainer />
             <Interests />
             <ProfileSkillsCard />
           </Col>
@@ -63,7 +56,7 @@ export default function ProfilePage({ ...props }) {
             <ProfilePromoted />
             <ProfileAdCard />
             <PeopleYouKnowContainer />
-            <ProfilePalsoV />
+            <ProfileAlsoViewed />
             <ProfileLearning />
           </Col>
         </Row>

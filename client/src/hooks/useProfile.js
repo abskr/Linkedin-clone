@@ -2,21 +2,18 @@ import React, { useState, useEffect } from 'react'
 import useFetch from 'use-http'
 import { useParams } from 'react-router-dom'
 
-function useProfiles() {
+function useProfile() {
   const { username } = useParams()
   // Get all profiles
-  const { data: profiles = [] } = useFetch('/profiles', { suspense: true }, [])
+  const { data: profiles = [] } = useFetch('/profiles', [])
 
   // Get myProfile
-  const { data: myProfile = [], error, loading } = useFetch(`/profiles/me`, [])
-
-  console.log(myProfile)
+  const { data: myProfile = [] } = useFetch(`/profiles/me`, [])
 
   // Get profile by username
   const { data: profile = [] } = useFetch(`/profiles/${username}`, [])
 
-  // const { get, post, put, del, response, loading, error, data } = useFetch('/')
-  // const { data: users = [] } = useFetch('/users', [])
+  // const { get, post, put, del, response } = useFetch('/')
   //
   // const getProfile = async (username) => {
   //   await get(`/profile/${username}`)
@@ -28,9 +25,7 @@ function useProfiles() {
   return {
     profile,
     myProfile,
-    error,
-    loading,
   }
 }
 
-export { useProfiles }
+export { useProfile }

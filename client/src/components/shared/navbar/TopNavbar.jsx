@@ -13,7 +13,7 @@ import { GoBell } from 'react-icons/go'
 import { CgMenuGridO } from 'react-icons/cg'
 import { RiSlideshow3Fill } from 'react-icons/ri'
 import { useAuth } from '../../../contexts/AuthContext.js'
-import { useProfiles } from '../../../hooks/useProfiles.js'
+import { useProfile } from '../../../hooks/useProfile.js'
 
 const navbarStyle = {
   backgroundColor: 'white',
@@ -35,7 +35,7 @@ const rightNav = {
 }
 export default function TopNavbar({ links, title, image, ...props }) {
   const { logout } = useAuth()
-  const { myProfile } = useProfiles()
+  const { myProfile } = useProfile()
 
   console.log(myProfile)
 

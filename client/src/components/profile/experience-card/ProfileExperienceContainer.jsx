@@ -1,88 +1,99 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'components/shared/modal/Modal.jsx'
 import ProfileExperienceCard from 'components/profile/experience-card/ProfileExperienceCard.jsx'
 import ProfileExperienceListItem from 'components/profile/experience-card/ProfileExperienceListItem.jsx'
 import PVAddExperienceForm from 'components/shared/forms/PVAddExperienceForm.jsx'
+import { useExperience } from '../../../hooks/useExperience.js'
+import { baseURL } from '../../../config.js'
+import axios from 'axios'
 
-// services
-import { getAllExperienceByUserId } from 'services/experienceService.js'
-import { getAllProfiles } from 'services/profileService.js'
-import {
-  addExperience,
-  deleteExperienceById,
-} from 'services/experienceService.js'
-import { Flag } from '@material-ui/icons'
-
-const USER_ID = '606c4b4b6fd22800153fdbcf'
-
-export default class ProfileExperienceContainer extends Component {
-  state = {
-    experience: [],
-    experienceObj: {
-      role: 'Natural Born Partner',
-      company: 'JuniorDev.life',
-      startDate: new Date(),
-      endDate: new Date(),
-      description: 'Just working with what god gave me ;)',
-      area: 'Matrix',
-      image:
-        'https://ih1.redbubble.net/image.2170556352.8233/pp,504x498-pad,600x600,f8f8f8.u1.jpg',
+export default function ProfileExperienceContainer() {
+  const token = JSON.parse(localStorage.getItem('token'))
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
-    showModal: false,
-    editing: false,
   }
 
-  handleModal = () => {
-    this.setState({
-      ...this.state,
-      showModal: !this.state.showModal,
-    })
+  console.log(options)
+
+  const [loading, setLoading] = useState()
+  const [model, setModel] = useState()
+  const [editing, setEditing] = useState()
+  const [experiences, setExperiences] = useState([])
+  const [experience, setExperience] = useState({
+    role: '',
+    company: '',
+    startDate: new Date(),
+    endDate: new Date(),
+    description: '',
+    area: '',
+    image: '',
+  })
+
+  useEffect(() => {
+    return () => {
+      console.log(experiences)
+    }
+  }, [])
+
+  const fetchExperiences = () => {
+    const data = axios.get(`${baseURL}`, {}, { options })
   }
 
-  handleSubmit = async (evt) => {
+  const handleModal = () => {
+    setModel(!model)
+  }
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault()
-    if (this.state.editing === true) {
-      const resp = await addExperience(
-        this.state.experienceObj,
-        '606c4b4b6fd22800153fdbcf'
-      )
-      console.log(resp)
-      this.setState({ ...this.state, showModal: false, editing: false })
-    }
-
-    if (this.state.editing === false) {
-      const resp = await addExperience(
-        this.state.experienceObj,
-        '606c4b4b6fd22800153fdbcf'
-      )
-      this.setState({ ...this.state, showModal: false, editing: false })
-      console.log(resp)
-    }
+    console.log(experience)
+    // if (editing === true) {
+    //   const resp = await addExperience(
+    //     this.state.experienceObj,
+    //     '606c4b4b6fd22800153fdbcf'
+    //   )
+    //   console.log(resp)
+    //   this.setState({ ...this.state, showModal: false, editing: false })
+    // }
+    //
+    // if (this.state.editing === false) {
+    //   const resp = await addExperience(
+    //     this.state.experienceObj,
+    //     '606c4b4b6fd22800153fdbcf'
+    //   )
+    //   this.setState({ ...this.state, showModal: false, editing: false })
+    //   console.log(resp)
+    // }
   }
 
-  handleInput = (evt) => {
+  const handleInput = (evt) => {
+    console.log(evt.target.value)
     const value = evt.target.value
-    this.setState({
-      ...this.state,
-      experienceObj: { ...this.state.experienceObj, [evt.target.id]: value },
+    setExperience({
+      ...experience,
+      [evt.target.id]: value,
     })
   }
 
-  handleStartDate = (date) => {
+  const handleStartDate = (date) => {
     console.log(date)
-    this.setState({
-      experienceObj: { ...this.state.experienceObj, startDate: date },
+    setExperience({
+      ...experience,
+      startDate: date,
     })
   }
 
-  handleEndDate = (date) => {
+  const handleEndDate = (date) => {
     console.log(date)
-    this.setState({
-      experienceObj: { ...this.state.experienceObj, endDate: date },
+    setExperience({
+      ...experience,
+      endDate: date,
     })
   }
 
-  handleEdit = (expObj) => {
+  const handleEdit = (expObj) => {
     console.log(expObj)
     this.setState({
       ...this.state,
@@ -92,48 +103,26 @@ export default class ProfileExperienceContainer extends Component {
     })
   }
 
-  handleDelete = async (userId, experienceId) => {
-    const resp = await deleteExperienceById(userId, experienceId)
-    this.setState({ ...this.state, showModal: false, editing: false })
-  }
-
-  async componentDidMount() {
-    const data = await getAllExperienceByUserId(USER_ID)
-    this.setState({ ...this.state, experience: data })
-  }
-
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevState.experience !== this.state.experience) {
-      const data = await getAllExperienceByUserId(USER_ID)
-      this.setState({ ...this.state, experience: data })
-    }
-  }
-
-  render() {
-    console.log('checker', this.state)
-    return (
-      <>
-        <Modal
-          title="Experience"
-          handleModal={this.handleModal}
-          showModal={this.state.showModal}
-        >
-          <PVAddExperienceForm
-            handleInput={this.handleInput}
-            handleSubmit={this.handleSubmit}
-            experienceObj={this.state.experienceObj}
-            handleStartDate={this.handleStartDate}
-            handleEndDate={this.handleEndDate}
-            handleDelete={this.handleDelete}
-            currExp={this.state.experienceObj}
-            userId={USER_ID}
-          />
-        </Modal>
-        <ProfileExperienceCard
-          handleModal={this.handleModal}
-          sectionTitle="Experience"
-        >
-          {this.state.experience.map((exp) => {
+  return (
+    <>
+      <Modal title="Experience" handleModal={handleModal} showModal={model}>
+        <PVAddExperienceForm
+          handleInput={handleInput}
+          handleSubmit={handleSubmit}
+          experienceObj={experience}
+          handleStartDate={handleStartDate}
+          handleEndDate={handleEndDate}
+          // handleDelete={handleDelete}
+          currExp={experience}
+        />
+      </Modal>
+      <ProfileExperienceCard
+        handleModal={handleModal}
+        sectionTitle="Experience"
+      >
+        {loading &&
+          experiences?.map((exp) => {
+            console.log(exp)
             return (
               <ProfileExperienceListItem
                 key={exp._id}
@@ -142,16 +131,15 @@ export default class ProfileExperienceContainer extends Component {
                 company={exp.company}
                 area={exp.area}
                 description={exp.description}
-                startDate={exp.startDate}
-                endDate={exp.endDate}
+                startDate={exp.from}
+                endDate={exp.to}
                 image={exp.image}
-                currExp={exp}
-                handleEdit={this.handleEdit}
+                // currExp={exp}
+                // handleEdit={this.handleEdit}
               />
             )
           })}
-        </ProfileExperienceCard>
-      </>
-    )
-  }
+      </ProfileExperienceCard>
+    </>
+  )
 }

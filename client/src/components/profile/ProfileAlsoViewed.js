@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-const ProfilePalsoV = () => {
+const ProfileAlsoViewed = () => {
   return (
     <Container>
       <Title>People Also Viewed </Title>
@@ -21,7 +21,7 @@ const ProfilePalsoV = () => {
   )
 }
 
-export default ProfilePalsoV
+export default ProfileAlsoViewed
 
 const Container = styled.div`
   background-color: white;

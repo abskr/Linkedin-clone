@@ -14,6 +14,7 @@ function AuthProvider(props) {
 
   const loginUser = async (email, password) => {
     const resp = await post('/auth', { email, password })
+    console.log(resp)
     if (resp) {
       setToken(resp.token)
       setUser(resp.user)

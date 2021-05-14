@@ -3,8 +3,12 @@ import { asyncHandler } from '../../../core/asyncHandler.js'
 import { BadRequestError, NotFoundError } from '../../../core/apiErrors.js'
 import { authGuard } from '../../../guard/authGuard.js'
 import ProfileModel from '../../../database/mongoDB/models/ProfileModel.js'
+import mongoose from 'mongoose'
 
 const router = express.Router()
+
+// TODO: Picture upload
+// TODO: Put Update
 
 // @route  POST v1/experiences
 // @desc   Get all experiences
@@ -13,11 +17,14 @@ router.get(
   '/',
   authGuard,
   asyncHandler(async (req, res, next) => {
-    console.log('profiles hit')
-    const profiles = await ProfileModel.find()
-    if (!profiles) return next(new NotFoundError('No profiles found!'))
+    const id = req.user.id
+    const { experience } = await ProfileModel.findOne({
+      user: mongoose.Types.ObjectId(id),
+    })
 
-    res.status(200).send(profiles)
+    if (!experience) return next(new NotFoundError('No profiles found!'))
+
+    res.status(200).send(experience)
   })
 )
 
@@ -28,7 +35,14 @@ router.get(
   '/:expId',
   authGuard,
   asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findById(id)
+    const profile = await ProfileModel.findOne(
+      { user: req.user.id },
+      {
+        experience: {
+          $elemMatch: { _id: mongoose.Types.ObjectId(req.params.expId) },
+        },
+      }
+    )
 
     if (!profile) return next(new NotFoundError('Experience not found'))
 
@@ -36,8 +50,8 @@ router.get(
   })
 )
 
-// @route  POST v1/profiles
-// @desc   Create Profile for Registered User
+// @route  POST v1/experience
+// @desc   Create experience for authed User
 // @access Private
 router.post(
   '/',
@@ -58,33 +72,41 @@ router.post(
   })
 )
 
-// @route  GET v1/profiles/id/:id
-// @desc   Get profile by id
+// @route  PUT v1/experience/:expId
+// @desc   Update experience by id
 // @access Private
-router.put(
-  '/:id',
-  authGuard,
-  asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        runValidators: true,
-        new: true,
-      }
-    )
-    if (!profile)
-      return next(new NotFoundError('No profile found for this ID!'))
-    res.status(200).send(profile)
-  })
-)
+// router.put(
+//   '/:expId',
+//   authGuard,
+//   asyncHandler(async (req, res, next) => {
+//     const profile = await ProfileModel.findByIdAndUpdate(
+//       req.params.id,
+//       req.body,
+//       {
+//         runValidators: true,
+//         new: true,
+//       }
+//     )
+//     if (!profile)
+//       return next(new NotFoundError('No profile found for this ID!'))
+//     res.status(200).send(profile)
+//   })
+// )
 
 router.delete(
-  '/:id',
+  '/:expId',
+  authGuard,
   asyncHandler(async (req, res, next) => {
-    const profile = await ProfileModel.findByIdAndDelete(req.params.id)
-    if (!profile)
-      return next(new NotFoundError('No profile found for this ID!'))
+    const result = await ProfileModel.updateOne(
+      { user: req.user.id },
+      {
+        $pull: {
+          experience: { _id: mongoose.Types.ObjectId(req.params.expId) },
+        },
+      },
+      { runValidators: true, new: true }
+    )
+    if (!result) return next(new BadRequestError('Error deleting experience'))
     res.status(200).send('deleted')
   })
 )
