@@ -48,6 +48,7 @@ const dropDownText = {
 }
 
 export default function FeedPostCard({ post, handleDelete }) {
+  console.log(post)
   return (
     <CardContainer bg="white" text="black" className="my-3 card-radius">
       <Card.Body className="px-3 pt-3 pb-0">
