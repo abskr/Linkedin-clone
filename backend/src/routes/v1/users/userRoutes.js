@@ -33,13 +33,16 @@ router.get(
 // @access Public
 router.post(
   '/',
-  checkSchema(usersPostValidator),
+  // checkSchema(usersPostValidator),
   asyncHandler(async (req, res, next) => {
-    validationHandler(req)
+    // validationHandler(req)
 
     const { name, lastname, email, password } = req.body
 
+    console.log(req.body)
+
     let user = await UserModel.findOne({ email })
+
     if (user) return next(new BadRequestError('User already exists'))
 
     const avatar = gravatar.url(email, {
@@ -48,7 +51,7 @@ router.post(
       d: 'mm',
     })
 
-    user = new UserModel({
+    user = await new UserModel({
       name,
       lastname,
       email,
@@ -63,10 +66,11 @@ router.post(
     // save new user to db
     user = await user.save()
 
+    const username = `${user.name}${user.lastname}${nanoid(10)}`
     // create & save new profile from new user data
     const profile = await new ProfileModel({
       user: user._id,
-      username: `${user.name}${user.lastname}${nanoid(10)}`,
+      username,
     })
 
     await profile.save()
@@ -80,7 +84,7 @@ router.post(
     // jwt sign and return token & user object in response to client
     jwt.sign(payload, jwtSecret, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err
-      res.status(201).send({ token, user, profile })
+      res.status(201).send({ token, user })
     })
   })
 )
