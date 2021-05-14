@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
+import React from 'react'
+import styled from 'styled-components'
+import BookmarkIcon from '@material-ui/icons/Bookmark'
 const PvDashboard = () => {
   return (
     <Container>
@@ -31,26 +31,27 @@ const PvDashboard = () => {
         </TextBookMark>
       </MyItems>
     </Container>
-  );
-};
+  )
+}
 
-export default PvDashboard;
+export default PvDashboard
 
 const Container = styled.div`
   height: 250px;
   background: #dce6f1;
-  border-radius: 4px;
+  border: 0.5px solid lightgray;
+  border-radius: 7px;
   padding: 10px;
-`;
+`
 
 const Header = styled.div`
   margin-bottom: 10px;
-`;
+`
 const YourDashboard = styled.div`
   font-size: 20px;
   font-weight: 500;
-`;
-const Privacy = styled.div``;
+`
+const Privacy = styled.div``
 const DashboardDetails = styled.div`
   display: flex;
   justify-content: space-around;
@@ -58,46 +59,46 @@ const DashboardDetails = styled.div`
   padding: 5px;
   border-radius: 6px;
   border: 1px solid grey;
-`;
+`
 const WhoViewed = styled.div`
   padding: 3px;
-`;
+`
 const ArticlesView = styled.div`
   border-left: 1px solid grey;
   padding: 3px;
-`;
+`
 const SearchAppearances = styled.div`
   border-left: 1px solid grey;
   padding: 3px;
-`;
+`
 const Number = styled.a`
   font-size: 30px;
   padding: 3px;
   :hover {
     text-decoration: 0;
   }
-`;
+`
 const Text = styled.div`
   font-weight: 300;
   padding: 3px;
-`;
+`
 const MyItems = styled.div`
   background: white;
   padding: 10px;
   display: flex;
   border-radius: 6px;
   margin-top: 10px;
-`;
+`
 const Item = styled.a`
   color: black;
   font-weight: 500;
-`;
+`
 const ItemText = styled.a`
   color: black;
   font-weight: 300;
-`;
+`
 const TextBookMark = styled.div`
   margin-left: 20px;
   display: flex;
   flex-direction: column;
-`;
+`

@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 let baseURL
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -8,4 +10,21 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   baseURL = process.env.REACT_APP_PROD
 }
 
-export { baseURL }
+// AXIOS BASE CONFIG
+const token = JSON.parse(localStorage.getItem('token'))
+// const options = {
+//   headers: {
+//     'Content-Type': 'application/json',
+//     Authorization: `Bearer ${token}`,
+//   },
+// }
+
+const backend = axios.create({
+  baseURL,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+})
+
+export { baseURL, backend }

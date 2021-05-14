@@ -4,23 +4,15 @@ import ProfileExperienceCard from 'components/profile/experience-card/ProfileExp
 import ProfileExperienceListItem from 'components/profile/experience-card/ProfileExperienceListItem.jsx'
 import PVAddExperienceForm from 'components/shared/forms/PVAddExperienceForm.jsx'
 import { useExperience } from '../../../hooks/useExperience.js'
-import { baseURL } from '../../../config.js'
+import { backend, baseURL } from '../../../config.js'
 import axios from 'axios'
 
 export default function ProfileExperienceContainer() {
-  const token = JSON.parse(localStorage.getItem('token'))
-  const options = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  }
-
-  console.log(options)
-
-  const [loading, setLoading] = useState()
+  const [loading, setLoading] = useState(false)
   const [model, setModel] = useState()
   const [editing, setEditing] = useState()
+  const [fileInputState, setFileInputState] = useState('')
+  const [selectedFile, setSelectedFile] = useState('')
   const [experiences, setExperiences] = useState([])
   const [experience, setExperience] = useState({
     role: '',
@@ -33,13 +25,29 @@ export default function ProfileExperienceContainer() {
   })
 
   useEffect(() => {
-    return () => {
-      console.log(experiences)
-    }
+    getExperiences()
   }, [])
 
-  const fetchExperiences = () => {
-    const data = axios.get(`${baseURL}`, {}, { options })
+  const getExperiences = async () => {
+    setLoading(true)
+    const { data } = await backend.get(`/experience`)
+    setExperiences(data)
+    setLoading(false)
+  }
+
+  const addExperience = async () => {
+    setLoading(true)
+    const { data } = await backend.post(`/experience`, {
+      role: 'Tech Lead',
+      company: 'Microsoft',
+      area: 'Los Angeles',
+    })
+    setExperience(data)
+    setLoading(false)
+  }
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0]
   }
 
   const handleModal = () => {
@@ -93,14 +101,14 @@ export default function ProfileExperienceContainer() {
     })
   }
 
-  const handleEdit = (expObj) => {
-    console.log(expObj)
-    this.setState({
-      ...this.state,
-      experienceObj: expObj,
-      showModal: !this.state.showModal,
-      editing: true,
+  const handleEdit = (exp) => {
+    console.log(exp)
+    setExperience({
+      ...experience,
+      experience: exp,
     })
+    setModel(!model)
+    setEditing(true)
   }
 
   return (
@@ -115,12 +123,19 @@ export default function ProfileExperienceContainer() {
           // handleDelete={handleDelete}
           currExp={experience}
         />
+        <hr />
+        {/*<input*/}
+        {/*  type="file"*/}
+        {/*  name="image"*/}
+        {/*  onChange={handleFileInputChange}*/}
+        {/*  value={fileInputState}*/}
+        {/*/>*/}
       </Modal>
       <ProfileExperienceCard
         handleModal={handleModal}
         sectionTitle="Experience"
       >
-        {loading &&
+        {!loading &&
           experiences?.map((exp) => {
             console.log(exp)
             return (
@@ -135,7 +150,7 @@ export default function ProfileExperienceContainer() {
                 endDate={exp.to}
                 image={exp.image}
                 // currExp={exp}
-                // handleEdit={this.handleEdit}
+                handleEdit={handleEdit}
               />
             )
           })}

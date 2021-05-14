@@ -45,7 +45,8 @@ export default function ProfileAboutCard({ setShowModal }) {
 
 const CardWrapper = styled.div`
   .card {
-    border-radius: 3rem !important;
+    border: 0.5px solid lightgray;
+    border-radius: 7px;
   }
 
   .cardTitle {
