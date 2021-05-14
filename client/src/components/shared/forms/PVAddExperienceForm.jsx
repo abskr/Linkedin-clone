@@ -10,10 +10,10 @@ function PVAddExperienceForm({
   handleInput,
   handleStartDate,
   handleEndDate,
-  experienceObj,
+  experience,
   handleDelete,
   currExp,
-  userId
+  userId,
 }) {
   return (
     <Form onSubmit={handleSubmit}>
@@ -21,7 +21,7 @@ function PVAddExperienceForm({
         <Form.Label className="text-muted">Role *</Form.Label>
         <Form.Control
           onChange={handleInput}
-          value={experienceObj.role}
+          value={experience.role}
           type="text"
           placeholder="Enter role"
         />
@@ -30,7 +30,7 @@ function PVAddExperienceForm({
         <Form.Label className="text-muted">Company *</Form.Label>
         <Form.Control
           onChange={handleInput}
-          value={experienceObj.company}
+          value={experience.company}
           type="text"
           placeholder="Enter company name"
         />
@@ -39,7 +39,7 @@ function PVAddExperienceForm({
         <Form.Label className="text-muted">Description *</Form.Label>
         <Form.Control
           onChange={handleInput}
-          value={experienceObj.description}
+          value={experience.description}
           type="text"
           placeholder="Enter description"
         />
@@ -48,7 +48,7 @@ function PVAddExperienceForm({
         <Form.Label className="text-muted">Location *</Form.Label>
         <Form.Control
           onChange={handleInput}
-          value={experienceObj.area}
+          value={experience.area}
           type="text"
           placeholder="Location"
         />
@@ -57,7 +57,7 @@ function PVAddExperienceForm({
         <Form.Label className="text-muted">Logo *</Form.Label>
         <Form.Control
           onChange={handleInput}
-          value={experienceObj.image}
+          value={experience.image}
           type="text"
           placeholder="Url"
         />
@@ -65,14 +65,14 @@ function PVAddExperienceForm({
       <Form.Group>
         <Form.Label className="text-muted mr-3 mt-4">Start Date</Form.Label>
         <DatePicker
-          selected={new Date(experienceObj.startDate)}
+          selected={new Date(experience.startDate)}
           onChange={handleStartDate}
         />
       </Form.Group>
       <Form.Group>
         <Form.Label className="text-muted mr-3">End Date</Form.Label>
         <DatePicker
-          selected={new Date(experienceObj.endDate)}
+          selected={new Date(experience.endDate)}
           onChange={handleEndDate}
         />
       </Form.Group>

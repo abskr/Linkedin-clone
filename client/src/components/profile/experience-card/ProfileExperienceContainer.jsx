@@ -38,9 +38,7 @@ export default function ProfileExperienceContainer() {
   const addExperience = async () => {
     setLoading(true)
     const { data } = await backend.post(`/experience`, {
-      role: 'Tech Lead',
-      company: 'Microsoft',
-      area: 'Los Angeles',
+      experiences,
     })
     setExperience(data)
     setLoading(false)
@@ -116,8 +114,8 @@ export default function ProfileExperienceContainer() {
       <Modal title="Experience" handleModal={handleModal} showModal={model}>
         <PVAddExperienceForm
           handleInput={handleInput}
-          handleSubmit={handleSubmit}
-          experienceObj={experience}
+          handleSubmit={addExperience}
+          experience={experience}
           handleStartDate={handleStartDate}
           handleEndDate={handleEndDate}
           // handleDelete={handleDelete}

@@ -51,7 +51,7 @@ router.post(
       d: 'mm',
     })
 
-    user = await new UserModel({
+    user = new UserModel({
       name,
       lastname,
       email,
@@ -64,11 +64,11 @@ router.post(
     user.password = await bcrypt.hash(password, salt)
 
     // save new user to db
-    user = await user.save()
+    await user.save()
 
     const username = `${user.name}${user.lastname}${nanoid(10)}`
     // create & save new profile from new user data
-    const profile = await new ProfileModel({
+    const profile = new ProfileModel({
       user: user._id,
       username,
     })
