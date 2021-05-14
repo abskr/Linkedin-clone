@@ -40,6 +40,22 @@ export default function Signup({ setUser, ...props }) {
       <FormContainer>
         <form style={{ padding: '12px 0 0 0' }} onSubmit={handleSubmit}>
           <label>
+            <p className="m-0">First Name:</p>
+            <input
+              type="text"
+              style={{ width: '360px' }}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            <p className="m-0">Last Name:</p>
+            <input
+              type="text"
+              style={{ width: '360px' }}
+              onChange={(e) => setLastname(e.target.value)}
+            />
+          </label>
+          <label>
             <p className="m-0">Email</p>
             <input
               type="text"
