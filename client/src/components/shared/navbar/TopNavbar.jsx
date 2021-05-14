@@ -9,6 +9,7 @@ import { HiHome } from 'react-icons/hi'
 import { BsPeopleFill } from 'react-icons/bs'
 import { BsBriefcaseFill } from 'react-icons/bs'
 import { RiMessage2Fill } from 'react-icons/ri'
+import { CgProfile } from 'react-icons/cg'
 import { GoBell } from 'react-icons/go'
 import { CgMenuGridO } from 'react-icons/cg'
 import { RiSlideshow3Fill } from 'react-icons/ri'
@@ -124,7 +125,7 @@ export default function TopNavbar({ links, title, image, ...props }) {
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
                   style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <img src={myProfile.image} alt='My Profile Pic'style={{ height: '24px' }} />
+                  <CgProfile style={{ fontSize: '24px' }}/>
                   Profile
                 </Link>
               </Nav.Item>
