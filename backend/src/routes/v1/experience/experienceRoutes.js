@@ -75,23 +75,40 @@ router.post(
 // @route  PUT v1/experience/:expId
 // @desc   Update experience by id
 // @access Private
-// router.put(
-//   '/:expId',
-//   authGuard,
-//   asyncHandler(async (req, res, next) => {
-//     const profile = await ProfileModel.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,
-//       {
-//         runValidators: true,
-//         new: true,
-//       }
-//     )
-//     if (!profile)
-//       return next(new NotFoundError('No profile found for this ID!'))
-//     res.status(200).send(profile)
-//   })
-// )
+router.put(
+  '/:expId',
+  authGuard,
+  asyncHandler(async (req, res, next) => {
+    const id = req.user.id
+    console.log(id)
+    const exp = await ProfileModel.findOne(
+      { user: req.user.id },
+      {
+        experience: {
+          $elemMatch: { _id: mongoose.Types.ObjectId(req.params.expId) },
+        },
+      }
+    )
+
+    const profile = await ProfileModel.updateOne(
+      {
+        user: id,
+        'experience._id': req.params.expId,
+      },
+      {
+        $set: {
+          'experience.$': {
+            ...req.body,
+            _id: req.params.expId,
+          },
+        },
+      }
+    )
+    if (!profile)
+      return next(new NotFoundError('No profile found for this ID!'))
+    res.status(200).send(profile)
+  })
+)
 
 router.delete(
   '/:expId',
