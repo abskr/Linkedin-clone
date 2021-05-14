@@ -124,7 +124,7 @@ export default function TopNavbar({ links, title, image, ...props }) {
                   className="text-dark d-flex flex-column justify-content-center align-items-center"
                   style={{ textDecoration: 'none', fontSize: '12px' }}
                 >
-                  <img src={image} style={{ height: '24px' }} />
+                  <img src={myProfile.image} alt='My Profile Pic'style={{ height: '24px' }} />
                   Profile
                 </Link>
               </Nav.Item>
