@@ -24,24 +24,20 @@ function AuthProvider(props) {
   }
 
   const registerUser = async (name, lastname, email, password) => {
-    const newUser = await post('/users', {
+    console.log('register user func', name, lastname, email, password)
+    const resp = await post('/users', {
       name,
       lastname,
       email,
       password,
     })
-
-    console.log('config', baseURL)
-    console.log(newUser)
-    if (newUser) {
-      setUser(newUser)
-      // response.send(newUser)
-      console.log('new user created')
+    console.log(resp)
+    if (resp) {
+      setUser(resp)
+      console.log('inside if', resp)
       history.push('/')
-      
     }
   }
-
 
   const logout = () => {
     setToken(null)
