@@ -14,20 +14,6 @@ const Feed = ({ handleSubmit, handleInput, postObj }) => {
       <FeedInputContainer>
         <FeedInput>
           <CreateIcon />
-          {/* <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="forBasicText">
-              <Form.Label>Comment</Form.Label>
-              <Form.Control
-                value={postObj.text}
-                onChange={handleInput}
-                type="text"
-                placeholder="Leave a Comment"
-              />
-            </Form.Group>
-            <Button className="mt-4" variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form> */}
           <ImageIcon>
             <img src="{profile.image}" alt="personImage" />
           </ImageIcon>
@@ -37,7 +23,7 @@ const Feed = ({ handleSubmit, handleInput, postObj }) => {
               onChange={handleInput}
               type="text"
               placeholder="Leave a Comment"
-            ></Input>
+            />
             <Submit>
               <Button className="rounded-pill" type="submit" variant="outline-secondary">Post</Button>
             </Submit>

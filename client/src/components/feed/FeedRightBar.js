@@ -53,7 +53,8 @@ export default FeedRightBar
 const Container = styled.div`
   background-color: white;
   padding-top: 20px;
-  border-radius: 7px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
   padding: 15px;
 `
 const People = styled.div`
